@@ -157,7 +157,7 @@ flex-wrap: wrap;
 justify-content: space-between;
 }
   
-#Recipes{
+.Recipes{
   display: flex;
   max-width: 310px;
 max-height: 500px;
@@ -166,7 +166,7 @@ flex-direction: column;
 margin-bottom: 20px;
 }
 
-#Recipes img{
+.Recipes  img{
   height: 210px;
   border: 1px solid gray;
 }
@@ -185,7 +185,8 @@ margin-right: 5px;
 justify-content: space-between;
 }
 
-.IngredientSteps ul{
+.IngredientStepsUL{
   list-style-type: none;
   margin-left: -35px;
 }
+
