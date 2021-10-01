@@ -14,7 +14,7 @@
     ></script>
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="main.js"></script>
-    <script type="module" src="components/filterBy.js"></script>
+
     <title>Les Petits Plats</title>
   </head>
   <body>
@@ -25,13 +25,22 @@
     </header>
     <main>
       <div class="ResearchField">
-        <input
-          type="text"
-          placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
-        />
+        <form class="search">
+          <input
+            oninput="filterRecipe(this.value)"
+            oninput="filterIngredient(this.value)"
+            type="search"
+            class="form-control"
+            placeholder="Search..."
+            submit
+          />
+        </form>
+        <!-- <input class="search" type="search" placeholder="Search..." /> -->
+
         <i class="fas fa-search"></i>
       </div>
       <div id="researchResult"></div>
+      <div id="tagList"></div>
       <div class="PageFilter">
         <div id="filterByIngredients">
           <a
@@ -53,7 +62,7 @@
               />
             </div>
           </a>
-          <div class="orderOptions" role="listbox">
+          <div class="orderOption" role="listbox" id="filterByIngredientsList">
             <a
               href="#"
               class="option"
@@ -84,7 +93,7 @@
               />
             </div>
           </a>
-          <div class="orderOptions" role="listbox">
+          <div class="orderOptions" role="listbox" id="filterByApplianceList">
             <a
               href="#"
               class="option"
@@ -115,7 +124,7 @@
               />
             </div>
           </a>
-          <div class="orderOptions" role="listbox">
+          <div class="orderOptions" role="listbox" id="filterByUstensilsList">
             <a
               href="#"
               class="option"

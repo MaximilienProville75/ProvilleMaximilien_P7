@@ -1,84 +1,176 @@
 import { recipes } from "./recipes.js";
+import Recipes from "./components/Recipes.js";
 
 const recipesGallery = document.getElementById("RecipeGallery");
+const filterByIngredientsDropDown = document.getElementById(
+  "filterByIngredientsList"
+);
+const filterByUstensils = document.getElementById("filterByUstensilsList");
+const filterByAppliance = document.getElementById("filterByApplianceList");
+const tagList = document.getElementById("tagList");
 
-// Class Recipes
-class Recipes {
-  constructor(id, name, servings, ingredients, time, description) {
-    this.id = id;
-    this.name = name;
-    this.servings = servings;
-    this.ingredients = ingredients;
-    this.time = time;
-    this.description = description;
-  }
+let allRecipes = [];
+let sameIngredient = [];
+let sameUstensils = [];
+let sameAppliance = [];
+let allRecipesName = [];
+let ActiveTAG = [];
+// let ustensilsTag = [];
+// let applianceTag = [];
+//All the active tag for ingredient are in
+// it those will  be very important for filtering the
+// final recipe render
 
-  render() {
-    //     <div id="Recipes">
-    const recipesDiv = document.createElement("div");
-    recipesDiv.classList.add("Recipes");
-    const recipeImg = document.createElement("img");
-    recipeImg.setAttribute("src", " ");
-    recipeImg.classList.add("RecipesImg");
-    const recipesDescription = document.createElement("div");
-    const recipeTitleTime = document.createElement("div");
-    recipeTitleTime.classList.add("RecipeTitleTime");
-    const recipeTitle = document.createElement("div");
-    recipeTitle.innerHTML = this.name;
-    const recipeTime = document.createElement("div");
-    recipeTime.innerHTML = `<i class="far fa-clock"></i>` + this.time;
-
-    const ingredientSteps = document.createElement("div");
-    ingredientSteps.classList.add("IngredientSteps");
-
-    const ingredients = document.createElement("div");
-
-    const ingredientUL = document.createElement("ul");
-
-    this.ingredients.forEach((ingredients) => {
-      let li = document.createElement("li");
-      ingredientUL.appendChild(li);
-
-      li.innerText =
-        ingredients.ingredient +
-        " " +
-        ingredients.quantity +
-        " " +
-        ingredients.unit;
-    });
-
-    const recipeSteps = document.createElement("p");
-    recipeSteps.innerHTML = this.description;
-
-    ingredients.appendChild(ingredientUL);
-    ingredientSteps.appendChild(ingredients);
-    ingredientSteps.appendChild(recipeSteps);
-
-    recipeTitleTime.appendChild(recipeTitle);
-    recipeTitleTime.appendChild(recipeTime);
-
-    recipesDescription.appendChild(recipeTitleTime);
-    recipesDescription.appendChild(ingredientSteps);
-
-    recipesDiv.appendChild(recipeImg);
-    recipesDiv.appendChild(recipesDescription);
-
-    recipesGallery.appendChild(recipesDiv);
-  }
+// Tag generator Section [ingredients / Ustenstils / Appareille]
+function tagApperanceIngredient(value) {
+  const tagAppearanceX = document.createElement("div");
+  tagAppearanceX.innerHTML = value;
+  tagAppearanceX.classList.add("tagAppearanceIngredient");
+  tagAppearanceX.addEventListener("click", () => {
+    close();
+  });
+  tagList.appendChild(tagAppearanceX);
 }
 
+function tagApperanceUstensils(value) {
+  const tagAppearanceX = document.createElement("div");
+  tagAppearanceX.innerHTML = value;
+  tagAppearanceX.classList.add("tagAppearanceUstensils");
+  tagList.appendChild(tagAppearanceX);
+}
+
+function tagAppearanceAppliance(value) {
+  const tagAppearanceX = document.createElement("div");
+  tagAppearanceX.innerHTML = value;
+  tagAppearanceX.classList.add("tagAppearanceAppliance");
+  tagList.appendChild(tagAppearanceX);
+}
+
+function close() {
+  const tagListClose = document.getElementById("tagList");
+  window.setTimeout(() => {
+    tagListClose.remove(tagListClose);
+  });
+}
+//  ==============================================================
+
+// filtering listing [ingredients / Ustenstils / Appareille]
+function renderIngredientsList(ingredient) {
+  const ingredientAnchor = document.createElement("a");
+  ingredientAnchor.setAttribute("href", "#");
+  const ingredientsLi = document.createElement("li");
+  ingredientsLi.addEventListener("click", () => {
+    ActiveTAG.push(ingredient);
+    tagApperanceIngredient(ingredient);
+  });
+  ingredientsLi.innerHTML = ingredient;
+  ingredientAnchor.appendChild(ingredientsLi);
+  filterByIngredientsDropDown.appendChild(ingredientAnchor);
+}
+function renderUstensilsList(ustensil) {
+  const ustensilAnchor = document.createElement("a");
+  ustensilAnchor.setAttribute("href", "#");
+  const ustensilLi = document.createElement("li");
+  ustensilLi.addEventListener("click", () => {
+    ActiveTAG.push(ustensil);
+    tagApperanceUstensils(ustensil);
+  });
+  ustensilLi.innerHTML = ustensil;
+  ustensilAnchor.appendChild(ustensilLi);
+  filterByUstensils.appendChild(ustensilAnchor);
+}
+function renderApplianceList(appliance) {
+  const applianceAnchor = document.createElement("a");
+  applianceAnchor.setAttribute("href", "#");
+  const applianceLi = document.createElement("li");
+  applianceLi.addEventListener("click", () => {
+    ActiveTAG.push(appliance);
+    tagAppearanceAppliance(appliance);
+  });
+  applianceLi.innerHTML = appliance;
+  applianceAnchor.appendChild(applianceLi);
+  filterByAppliance.appendChild(applianceAnchor);
+}
+console.log(ActiveTAG);
+//  ==============================================================
+
 recipes.forEach((recipe) => {
-  const { id, name, servings, ingredients, time, description } = recipe;
+  const {
+    id,
+    name,
+    servings,
+    ingredients,
+    time,
+    description,
+    appliance,
+    ustensils,
+  } = recipe;
+
   let newRecipe = new Recipes(
     id,
     name,
     servings,
     ingredients,
     time,
-    description
+    description,
+    appliance,
+    ustensils
   );
+
   newRecipe.render();
+  allRecipes.push(newRecipe);
+  allRecipesName.push(newRecipe.name);
+
+  ingredients.forEach((ingredient) => {
+    sameIngredient.push(ingredient.ingredient.toLowerCase());
+  });
+  ustensils.forEach((ustensil) => {
+    sameUstensils.push(ustensil.toLowerCase());
+  });
+  sameAppliance.push(appliance.toLowerCase());
 });
+
+//  ==============================================================
+
+// Filtering the Arrays to have unique Value in it.
+let filteredIngredient = [...new Set(sameIngredient)];
+filteredIngredient.forEach((ingredient) => {
+  renderIngredientsList(ingredient);
+});
+let filteredUstensils = [...new Set(sameUstensils)];
+filteredUstensils.forEach((ustensil) => {
+  renderUstensilsList(ustensil);
+});
+let filteredAppliance = [...new Set(sameAppliance)];
+filteredAppliance.forEach((appliance) => {
+  renderApplianceList(appliance);
+});
+
+//  ==============================================================
+
+function filterRecipe(query) {
+  recipesGallery.innerHTML = "";
+
+  const search = document.querySelector(".search input");
+  const userInput = search.value.trim();
+
+  allRecipesName.map((recipe) => {
+    userInput.split(" ").map((word) => {
+      if (recipe.toLowerCase().indexOf(word.toLowerCase()) != -1) {
+        recipesGallery.innerHTML += `<p>${recipe}</p>`;
+      }
+    });
+  });
+}
+
+filterRecipe(" ");
+console.log(allRecipes);
+console.log(allRecipesName);
+console.log(filteredIngredient);
+console.log(filteredAppliance);
+console.log(filteredUstensils);
+// let userInput = document.getElementById("userInput");
+// console.log(userInput);
 
 // Get the user INPUT from the searchBar
 // function userInput() {}
