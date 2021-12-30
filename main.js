@@ -8,6 +8,7 @@ const filterByIngredientsDropDown = document.getElementById(
 const filterByUstensils = document.getElementById("filterByUstensilsList");
 const filterByAppliance = document.getElementById("filterByApplianceList");
 const tagList = document.getElementById("tagList");
+// const nameTag = document.getElement("data-name");
 
 let allRecipes = [];
 let sameIngredient = [];
@@ -15,8 +16,6 @@ let sameUstensils = [];
 let sameAppliance = [];
 let allRecipesName = [];
 let ActiveTAG = [];
-// let ustensilsTag = [];
-// let applianceTag = [];
 //All the active tag for ingredient are in
 // it those will  be very important for filtering the
 // final recipe render
@@ -24,37 +23,44 @@ let ActiveTAG = [];
 // Tag generator Section [ingredients / Ustenstils / Appareille]
 function tagApperanceIngredient(value) {
   const tagAppearanceX = document.createElement("div");
-  tagAppearanceX.innerHTML = value;
+  tagAppearanceX.innerHTML = value + `<i class="fas fa-times"></i>`;
+  tagAppearanceX.setAttribute("data-name", value);
   tagAppearanceX.classList.add("tagAppearanceIngredient");
   tagAppearanceX.addEventListener("click", () => {
-    close();
+    close(tagAppearanceX);
   });
   tagList.appendChild(tagAppearanceX);
 }
 
 function tagApperanceUstensils(value) {
   const tagAppearanceX = document.createElement("div");
-  tagAppearanceX.innerHTML = value;
+  tagAppearanceX.innerHTML = value + `<i class="fas fa-times"></i>`;
   tagAppearanceX.classList.add("tagAppearanceUstensils");
+  tagAppearanceX.addEventListener("click", () => {
+    close(tagAppearanceX);
+  });
   tagList.appendChild(tagAppearanceX);
 }
 
 function tagAppearanceAppliance(value) {
   const tagAppearanceX = document.createElement("div");
-  tagAppearanceX.innerHTML = value;
+  tagAppearanceX.innerHTML = value + `<i class="fas fa-times"></i>`;
   tagAppearanceX.classList.add("tagAppearanceAppliance");
+  tagAppearanceX.addEventListener("click", () => {
+    close(tagAppearanceX);
+  });
   tagList.appendChild(tagAppearanceX);
 }
 
-function close() {
-  const tagListClose = document.getElementById("tagList");
+function close(value) {
   window.setTimeout(() => {
-    tagListClose.remove(tagListClose);
+    value.style.display = "none";
   });
 }
-//  ==============================================================
 
+//  ==============================================================
 // filtering listing [ingredients / Ustenstils / Appareille]
+
 function renderIngredientsList(ingredient) {
   const ingredientAnchor = document.createElement("a");
   ingredientAnchor.setAttribute("href", "#");
@@ -91,7 +97,15 @@ function renderApplianceList(appliance) {
   applianceAnchor.appendChild(applianceLi);
   filterByAppliance.appendChild(applianceAnchor);
 }
-console.log(ActiveTAG);
+
+// Delete element from tag Active Array
+ActiveTAG.forEach((tag) => {
+  tag.addEventListener("click", () => {
+    console.log("close");
+  });
+});
+
+function filterTag() {}
 //  ==============================================================
 
 recipes.forEach((recipe) => {
@@ -123,6 +137,11 @@ recipes.forEach((recipe) => {
 
   ingredients.forEach((ingredient) => {
     sameIngredient.push(ingredient.ingredient.toLowerCase());
+    ActiveTAG.forEach((tag) => {
+      if (tag === ingredient) {
+        console.log(ingredient);
+      }
+    });
   });
   ustensils.forEach((ustensil) => {
     sameUstensils.push(ustensil.toLowerCase());
@@ -164,14 +183,16 @@ function filterRecipe(query) {
 }
 
 filterRecipe(" ");
+
+//  ==============================================================
+
+//                              TESTING
 console.log(allRecipes);
 console.log(allRecipesName);
 console.log(filteredIngredient);
 console.log(filteredAppliance);
 console.log(filteredUstensils);
-// let userInput = document.getElementById("userInput");
-// console.log(userInput);
-
+console.log(ActiveTAG);
 // Get the user INPUT from the searchBar
 // function userInput() {}
 

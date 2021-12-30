@@ -1,0 +1,4 @@
+2eme façons ==> analise de differenciation du DOM en regardant si c'est ustensile / appareil / ingredients. 
+Soit variable ==> rajouter info dans le tableau (type de donne) (tag) || scaner uniquement le DOM 
+
+verifier que l'instalation via git clone 

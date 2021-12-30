@@ -73,7 +73,7 @@ flex-wrap: wrap;
     padding: 10px;
     background-color: #3282F7;
     margin-top: 10px;
-    height: 40px;
+    height: 200px;
   }
 
   #filterByAppareil{
@@ -126,11 +126,14 @@ flex-wrap: wrap;
   }
   
   .orderOptions {
-    display: none;
+    /* display: none; */
   }
 
   .orderOption {
-    display: none;
+    /* display: none; */
+  }
+  p{
+    overflow: hidden;
   }
   
   .orderOptions .option {
@@ -158,18 +161,24 @@ flex-wrap: wrap;
   width: 150px; 
   background-color: #3282F7;
   color: #fff;
+  display: flex;
+justify-content: space-between;
 }
 
 .tagAppearanceUstensils{
   width: 150px; 
   background-color: #ED6454;
   color: #fff;
+  display: flex;
+justify-content: space-between;
 }
 
 .tagAppearanceAppliance{
   width: 150px; 
   background-color: #68D9A4;
   color: #fff;
+  display: flex;
+justify-content: space-between;
 }
 /* Recipes */
 
