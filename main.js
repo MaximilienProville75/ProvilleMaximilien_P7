@@ -5,10 +5,18 @@ let recipes = [];
 searchBar.addEventListener("keyup", (e) => {
   const searchString = e.target.value.toLowerCase();
 
-  const filteredRecipesName = recipes.filter((character) => {
-    return character.name.toLowerCase().includes(searchString);
+  const filteredRecipes = recipes.filter((recipe) => {
+    const arrayIngredient = recipe.ingredients.map((ingredient) => {
+      return ingredient.ingredient.toLowerCase();
+    });
+
+    return (
+      recipe.name.toLowerCase().includes(searchString) ||
+      arrayIngredient.includes(searchString) ||
+      recipe.description.toLowerCase().includes(searchString)
+    );
   });
-  displayRecipes(filteredRecipesName);
+  displayRecipes(filteredRecipes);
 });
 
 const loadRecipes = async () => {
@@ -16,7 +24,6 @@ const loadRecipes = async () => {
     const res = await fetch("/recipes.json");
     recipes = await res.json();
     displayRecipes(recipes);
-    // console.log(recipes);
   } catch (err) {
     console.log(err);
   }
