@@ -22,7 +22,7 @@ header{
   height: 100px;
 }
 
-.ResearchField{
+.searchWrapper{
     max-width: 1000px;
     margin: auto;
     margin-top: 20px;
@@ -33,7 +33,7 @@ input{
     border: none;
     height: 40px;
 }
-.ResearchField input{
+.searchWrapper input{
     width: 100%;
     background-color: #E7E7E7;
     border-radius: 5px;
@@ -43,146 +43,15 @@ input[type="text"]{
     font-size:18px;
 }
 
-.ResearchField i{
+.searchWrapper i{
     position: absolute;
     right: 15px;
     top: 162px;
 }
 
-
-/* Filter Class */
-.PageFilter{
-    display: flex;
-    flex-direction:row;
-    justify-content: space-between;
-margin-top: 8px;
-max-width: 600px;
-flex-wrap: wrap;
-}
-
-#filterOrderBy {
-    position: relative;
-    z-index: 2;
-    margin: 10px 0 5rem;
-  }
-  
-  #filterByIngredients {
-    border: none;
-    border-radius: 5px;
-    min-width: 165px;
-    padding: 10px;
-    background-color: #3282F7;
-    margin-top: 10px;
-    height: 200px;
-  }
-
-  #filterByAppareil{
-    border: none;
-    border-radius: 5px;
-    min-width: 165px;
-    padding: 10px;
-    background-color: #68D9A4;
-    margin-top: 10px;
-  }
-
-  #filterByUstensils{
-    border: none;
-    border-radius: 5px;
-    min-width: 165px;
-    padding: 10px;
-    background-color: #ED6454;
-    margin-top: 10px;
-  }
-  
-  #filterByIngredients a, #filterByIngredients #orderSelected {
-    font-size: 14px;
-    font-weight: 700;
-    color: #fff;
-  }
-
-  #filterTitle {
-    display: inline-block;
-    margin-right: 10px;
-    font-size: 14px;
-    font-weight: 700;
-    color: #181818;
-  }
-  
-  #orderByClick{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-  }
-  
-  #orderSelected {
-    padding: .2rem 0;
-  }
-  
-  .orderImg {
-    margin-left: .7rem;
-    padding-top: 10px;
-  }
-  
-  .orderOptions {
-    /* display: none; */
-  }
-
-  .orderOption {
-    /* display: none; */
-  }
-  p{
-    overflow: hidden;
-  }
-  
-  .orderOptions .option {
-    width: 100%;
-    padding-top: .9rem;
-    margin-top: .9rem;
-    border-top: 1px solid #fff;
-  }
-  
-  .open {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-    animation: slide-down .4s ease-in-out forwards;
-  }
-
-
-#tagList{
-  display: flex;
-}
-
-.tagAppearanceIngredient{
-  width: 150px; 
-  background-color: #3282F7;
-  color: #fff;
-  display: flex;
-justify-content: space-between;
-}
-
-.tagAppearanceUstensils{
-  width: 150px; 
-  background-color: #ED6454;
-  color: #fff;
-  display: flex;
-justify-content: space-between;
-}
-
-.tagAppearanceAppliance{
-  width: 150px; 
-  background-color: #68D9A4;
-  color: #fff;
-  display: flex;
-justify-content: space-between;
-}
 /* Recipes */
 
-#RecipeGallery{
+#recipeList{
   display: flex;
   margin-top: 35px;
   flex-direction: row;

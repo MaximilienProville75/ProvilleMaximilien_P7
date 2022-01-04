@@ -24,118 +24,19 @@
       </div>
     </header>
     <main>
-      <div class="ResearchField">
+      <div class="searchWrapper">
         <form class="search">
           <input
-            oninput="filterRecipe(this.value)"
-            type="search"
+            type="text"
+            name="searchBar"
             class="form-control"
             placeholder="Search..."
-            submit
+            id="searchBar"
           />
         </form>
-        <!-- <input class="search" type="search" placeholder="Search..." /> -->
-
         <i class="fas fa-search"></i>
       </div>
-      <div id="researchResult"></div>
-      <div id="tagList"></div>
-      <div class="PageFilter">
-        <div id="filterByIngredients">
-          <a
-            href="#"
-            id="orderByClick"
-            role="button"
-            aria-haspopup="listbox"
-            aria-expanded="false"
-            aria-label="Order by"
-            aria-controls="orderOptions"
-            aria-labelledby="order-by__title"
-          >
-            <span id="orderSelected"></span>
-            <div class="orderImg">
-              <img
-                src="Media_Ressources/arrowDown.svg"
-                alt=""
-                id="orderbotArrow"
-              />
-            </div>
-          </a>
-          <div class="orderOption" role="listbox" id="filterByIngredientsList">
-            <a
-              href="#"
-              class="option"
-              data-value="popularite"
-              aria-selected="true"
-              role="option"
-              >Ingredients</a
-            >
-          </div>
-        </div>
-        <div id="filterByAppareil">
-          <a
-            href="#"
-            id="orderByClick"
-            role="button"
-            aria-haspopup="listbox"
-            aria-expanded="false"
-            aria-label="Order by"
-            aria-controls="orderOptions"
-            aria-labelledby="order-by__title"
-          >
-            <span id="orderSelected"></span>
-            <div class="orderImg">
-              <img
-                src="Media_Ressources/arrowDown.svg"
-                alt=""
-                id="orderbotArrow2"
-              />
-            </div>
-          </a>
-          <div class="orderOptions" role="listbox" id="filterByApplianceList">
-            <a
-              href="#"
-              class="option"
-              data-value="popularite"
-              aria-selected="true"
-              role="option"
-              >Appareil</a
-            >
-          </div>
-        </div>
-        <div id="filterByUstensils">
-          <a
-            href="#"
-            id="orderByClick"
-            role="button"
-            aria-haspopup="listbox"
-            aria-expanded="false"
-            aria-label="Order by"
-            aria-controls="orderOptions"
-            aria-labelledby="order-by__title"
-          >
-            <span id="orderSelected"></span>
-            <div class="orderImg">
-              <img
-                src="Media_Ressources/arrowDown.svg"
-                alt=""
-                id="orderbotArrow2"
-              />
-            </div>
-          </a>
-          <div class="orderOptions" role="listbox" id="filterByUstensilsList">
-            <a
-              href="#"
-              class="option"
-              data-value="popularite"
-              aria-selected="true"
-              role="option"
-              >Ustensils</a
-            >
-          </div>
-        </div>
-      </div>
-      <div id="RecipeGallery"></div>
+      <ul id="recipeList"></ul>
     </main>
   </body>
 </html>
