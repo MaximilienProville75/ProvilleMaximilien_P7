@@ -1,11 +1,18 @@
 const recipeList = document.getElementById("recipeList");
 const searchBar = document.getElementById("searchBar");
 let recipes = [];
+let ingredients = [];
+let recipesIng;
 
 // searchBar for ingredient / apparel / ustentils
 const ingredientFilter = document.getElementById("ingredientFilter");
+const ingredientUl = document.getElementById("uniIngredient");
+
 const appareilFilter = document.getElementById("appareilFilter");
+const appareilUl = document.getElementById("uniAppareil");
+
 const ustensilesFilter = document.getElementById("ustensilesFilter");
+const ustensilesUl = document.getElementById("uniUstensiles");
 
 searchBar.addEventListener("keyup", (e) => {
   const searchString = e.target.value.toLowerCase();
@@ -33,6 +40,13 @@ const loadRecipes = async () => {
     console.log(err);
   }
 };
+
+//TODO 1] add event listener onclick to show the dropDown menu of filtering
+//TODO 2] add event listener keyup on dropdown research input
+//TODO 3] add array of active tag that later on will be add to searchBar
+//TODO filtering version --> displayRecipes(ActiveTag)
+
+console.log(ingredients);
 
 const displayRecipes = (recipes) => {
   const htmlString = recipes
@@ -63,7 +77,7 @@ const displayRecipes = (recipes) => {
                 )}
               </ul>
             </div>
-            <p>${recipe.description}</p>
+            <p class="recipeDescription">${recipe.description}</p>
           </div>
         </div>
     </li>
@@ -71,6 +85,15 @@ const displayRecipes = (recipes) => {
     })
     .join("");
   recipeList.innerHTML = htmlString;
+};
+
+const displayIngredients = (ingredients) => {
+  const htmlString = ingredients;
+
+  htmlString.filter((item) => {
+    return `<li class="ingredients">${item}</li>`;
+  });
+  ingredientUl.innerHTML = htmlString;
 };
 
 loadRecipes();
