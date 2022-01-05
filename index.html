@@ -36,6 +36,54 @@
         </form>
         <i class="fas fa-search"></i>
       </div>
+      <!-- DROPDOWN FILTER -->
+      <div class="dropdownFilters">
+        <div id="ingredientFilter">
+          Ingrédient
+          <div id="dropdownIngredient" class="dropdownIngredient">
+            <form class="ingredientSearch">
+              <input
+                type="text"
+                name="searchBar"
+                class="form-control"
+                placeholder="Rechercher un ingrédient"
+                id="searchIngredient"
+              />
+            </form>
+            <ul id="uniIngredient"></ul>
+          </div>
+        </div>
+        <div id="appareilFilter">
+          Appareil
+          <div id="dropdownAppareil" class="dropdownAppareil">
+            <form class="AppreilSearch">
+              <input
+                type="text"
+                name="searchBar"
+                class="form-control"
+                placeholder="Rechercher un appareil"
+                id="searchAppreil"
+              />
+            </form>
+            <ul id="uniAppreil"></ul>
+          </div>
+        </div>
+        <div id="ustensilesFilter">
+          Ustentiles
+          <div id="dropdownUstensiles" class="dropdownUstensiles">
+            <form class="UstensilesSearch">
+              <input
+                type="text"
+                name="searchBar"
+                class="form-control"
+                placeholder="Rechercher un ustensiles"
+                id="searchUstensiles"
+              />
+            </form>
+            <ul id="uniUstensiles"></ul>
+          </div>
+        </div>
+      </div>
       <ul id="recipeList"></ul>
     </main>
   </body>

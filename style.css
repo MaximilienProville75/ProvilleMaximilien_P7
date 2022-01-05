@@ -67,15 +67,27 @@ margin-left: -35px;
 .Recipes{
   display: flex;
   max-width: 310px;
-max-height: 500px;
+max-height: 360px;
 border: 1px solid black;
 flex-direction: column;
 margin-bottom: 20px;
+
 }
 
-.Recipes  img{
-  height: 210px;
+.RecipeTime{
+  font-weight: bold;
+}
+
+.RecipesImg {
+  height: 178px;
+  width: 100%;
+  background-color: #C7BEBE;
   border: 1px solid gray;
+}
+
+.RecipeDescription{
+  background-color: #E7E7E7;
+  ;
 }
 
 .RecipeTitleTime{
@@ -92,8 +104,55 @@ margin-right: 5px;
 justify-content: space-between;
 }
 
+.IngredientSteps p{
+  overflow: hidden;
+}
+
 .IngredientStepsUL{
   list-style-type: none;
   margin-left: -35px;
 }
 
+.IngredientUl{
+  overflow: hidden;
+}
+
+/* Filters */
+
+.dropdownFilters{
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Ingredients */
+#ingredientFilter{
+  background-color: #3282F7;
+  color: white;
+}
+#searchIngredient{
+  background-color: #3282F7;
+  color: white;
+}
+
+
+/* Appareil */
+#appareilFilter{
+  background-color: #68D9A4;
+  color: white;
+}
+#searchAppreil{
+  background-color: #68D9A4;
+  color: white;
+}
+
+
+/* Ustentiles */
+#ustensilesFilter{
+  background-color: #ED6454;
+  color: white;
+}
+#searchUstensiles{
+  background-color: #ED6454;
+  color: white;
+}

@@ -2,6 +2,11 @@ const recipeList = document.getElementById("recipeList");
 const searchBar = document.getElementById("searchBar");
 let recipes = [];
 
+// searchBar for ingredient / apparel / ustentils
+const ingredientFilter = document.getElementById("ingredientFilter");
+const appareilFilter = document.getElementById("appareilFilter");
+const ustensilesFilter = document.getElementById("ustensilesFilter");
+
 searchBar.addEventListener("keyup", (e) => {
   const searchString = e.target.value.toLowerCase();
 
@@ -37,13 +42,15 @@ const displayRecipes = (recipes) => {
 
       return `
     <li class="Recipes">
+      <div class="RecipesBg">
       <img src=" "  class="RecipesImg"/>
+      </div>
         <div class="RecipeDescription">
           <div class="RecipeTitleTime"> 
             <div class="RecipeTitle">${recipe.name}</div>
             <div class="RecipeTime"><i class="far fa-clock"></i>${
               recipe.time
-            }</div>
+            } min</div>
           </div>
           <div class="IngredientSteps">
             <div class="Ingredients">
