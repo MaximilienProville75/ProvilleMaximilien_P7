@@ -194,4 +194,19 @@ const displayUstensiles = (Ustensiles) => {
 //   });
 // }
 
+const renderIngredientTag = (ingredient) => {
+  const htmlString = `<div class="tagAppearanceIngredient">${ingredient} <i class="fas fa-times"></i></div>`;
+  tagArray.innerHTML = htmlString;
+};
+
+const renderAppareilTag = (appareil) => {
+  const htmlString = `<div class="tagAppearanceAppliance">${appareil} <i class="fas fa-times"></i></div>`;
+  tagArray.innerHTML = htmlString;
+};
+
+const renderUstentilesTag = (ustensile) => {
+  const htmlString = `<div class="tagAppearanceUstensils">${ustensile} <i class="fas fa-times"></i></div>`;
+  tagArray.innerHTML = htmlString;
+};
+
 loadRecipes();
