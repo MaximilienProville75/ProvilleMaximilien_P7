@@ -1,8 +1,15 @@
 const recipeList = document.getElementById("recipeList");
 const searchBar = document.getElementById("searchBar");
 let recipes = [];
-let ingredients = [];
-let recipesIng;
+
+let sameIngredients = [];
+let singleIngredients = [];
+
+let sameAppareil = [];
+let singleAppareil = [];
+
+let sameUstensils = [];
+let singleUstensils = [];
 
 // searchBar for ingredient / apparel / ustentils
 const ingredientFilter = document.getElementById("ingredientFilter");
@@ -14,6 +21,7 @@ const appareilUl = document.getElementById("uniAppareil");
 const ustensilesFilter = document.getElementById("ustensilesFilter");
 const ustensilesUl = document.getElementById("uniUstensiles");
 
+//! SearchBars Algorithm
 searchBar.addEventListener("keyup", (e) => {
   const searchString = e.target.value.toLowerCase();
 
@@ -21,6 +29,7 @@ searchBar.addEventListener("keyup", (e) => {
     const arrayIngredient = recipe.ingredients.map((ingredient) => {
       return ingredient.ingredient.toLowerCase();
     });
+    console.log(arrayIngredient);
 
     return (
       recipe.name.toLowerCase().includes(searchString) ||
@@ -31,11 +40,71 @@ searchBar.addEventListener("keyup", (e) => {
   displayRecipes(filteredRecipes);
 });
 
+//! Ingredient SearchBar
+ingredientFilter.addEventListener("keyup", (e) => {
+  const searchString = e.target.value.toLowerCase();
+
+  const filteredIngredient = singleIngredients.filter((ingredient) => {
+    return ingredient.toLowerCase().includes(searchString);
+  });
+  displayIngredient(filteredIngredient);
+});
+
+//! Appareil SearchBar
+appareilFilter.addEventListener("keyup", (e) => {
+  const searchString = e.target.value.toLowerCase();
+
+  const filteredAppareil = singleAppareil.filter((appareil) => {
+    return appareil.toLowerCase().includes(searchString);
+  });
+  displayAppareil(filteredAppareil);
+});
+
+//! Ustentils SearchBar
+ustensilesFilter.addEventListener("keyup", (e) => {
+  const searchString = e.target.value.toLowerCase();
+
+  const filteredUstentiles = singleUstensils.filter((ustentils) => {
+    return ustentils.toLowerCase().includes(searchString);
+  });
+  displayUstensiles(filteredUstentiles);
+});
+
+//! Fetch Function
+
 const loadRecipes = async () => {
   try {
     const res = await fetch("/recipes.json");
     recipes = await res.json();
     displayRecipes(recipes);
+
+    //* Single Out Ingredients
+    const recipesIngredients = recipes.filter((recipe) => {
+      const multipleIngRecipes = recipe.ingredients;
+      multipleIngRecipes.filter((recipe) => {
+        sameIngredients.push(recipe.ingredient);
+      });
+    });
+    singleIngredients = [...new Set(sameIngredients)];
+    displayIngredient(singleIngredients);
+
+    //* Single Out Appareil
+    const recipesAppareil = recipes.filter((recipe) => {
+      const multipleApp = recipe.appliance;
+      sameAppareil.push(multipleApp);
+    });
+    singleAppareil = [...new Set(sameAppareil)];
+    displayAppareil(singleAppareil);
+    console.log(singleAppareil);
+    //* Single Out Ustensiles
+    const recipesUstensils = recipes.filter((recipe) => {
+      const multipleUst = recipe.ustensils;
+      multipleUst.filter((ust) => {
+        sameUstensils.push(ust);
+      });
+    });
+    singleUstensils = [...new Set(sameUstensils)];
+    displayUstensiles(singleUstensils);
   } catch (err) {
     console.log(err);
   }
@@ -46,7 +115,7 @@ const loadRecipes = async () => {
 //TODO 3] add array of active tag that later on will be add to searchBar
 //TODO filtering version --> displayRecipes(ActiveTag)
 
-console.log(ingredients);
+//! Display Functions
 
 const displayRecipes = (recipes) => {
   const htmlString = recipes
@@ -87,13 +156,29 @@ const displayRecipes = (recipes) => {
   recipeList.innerHTML = htmlString;
 };
 
-const displayIngredients = (ingredients) => {
-  const htmlString = ingredients;
-
-  htmlString.filter((item) => {
-    return `<li class="ingredients">${item}</li>`;
-  });
+const displayIngredient = (ingredients) => {
+  const htmlString = ingredients
+    .map((ingredient) => {
+      return `<li>${ingredient}</li>`;
+    })
+    .join("");
   ingredientUl.innerHTML = htmlString;
+};
+
+const displayAppareil = (appareil) => {
+  const htmlString = appareil
+    .map((appa) => {
+      return `<li>${appa}</li>`;
+    })
+    .join("");
+  appareilUl.innerHTML = htmlString;
+};
+
+const displayUstensiles = (Ustensiles) => {
+  const htmlString = Ustensiles.map((ust) => {
+    return `<li>${ust}</li>`;
+  }).join("");
+  ustensilesUl.innerHTML = htmlString;
 };
 
 loadRecipes();
