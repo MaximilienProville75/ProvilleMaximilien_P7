@@ -21,6 +21,10 @@ const appareilUl = document.getElementById("uniAppareil");
 const ustensilesFilter = document.getElementById("ustensilesFilter");
 const ustensilesUl = document.getElementById("uniUstensiles");
 
+//Tags
+const tagList = document.getElementById("tagList");
+let tagArray = [];
+
 //! SearchBars Algorithm
 searchBar.addEventListener("keyup", (e) => {
   const searchString = e.target.value.toLowerCase();
@@ -95,7 +99,7 @@ const loadRecipes = async () => {
     });
     singleAppareil = [...new Set(sameAppareil)];
     displayAppareil(singleAppareil);
-    console.log(singleAppareil);
+
     //* Single Out Ustensiles
     const recipesUstensils = recipes.filter((recipe) => {
       const multipleUst = recipe.ustensils;
@@ -159,9 +163,10 @@ const displayRecipes = (recipes) => {
 const displayIngredient = (ingredients) => {
   const htmlString = ingredients
     .map((ingredient) => {
-      return `<li>${ingredient}</li>`;
+      return `<li >${ingredient}</li>`;
     })
     .join("");
+
   ingredientUl.innerHTML = htmlString;
 };
 
@@ -171,6 +176,7 @@ const displayAppareil = (appareil) => {
       return `<li>${appa}</li>`;
     })
     .join("");
+
   appareilUl.innerHTML = htmlString;
 };
 
@@ -180,5 +186,12 @@ const displayUstensiles = (Ustensiles) => {
   }).join("");
   ustensilesUl.innerHTML = htmlString;
 };
+
+//! Tag Display
+// function close(value) {
+//   window.setTimeout(() => {
+//     value.display = "none";
+//   });
+// }
 
 loadRecipes();

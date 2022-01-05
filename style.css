@@ -167,3 +167,26 @@ justify-content: space-between;
   background-color: #ED6454;
   color: white;
 }
+
+/* Tags */
+#tagList{
+  display: flex;
+}
+
+.tagAppearanceIngredient{
+  width: 150px; 
+  background-color: #3282F7;
+  color: #fff;
+}
+
+.tagAppearanceUstensils{
+  width: 150px; 
+  background-color: #ED6454;
+  color: #fff;
+}
+
+.tagAppearanceAppliance{
+  width: 150px; 
+  background-color: #68D9A4;
+  color: #fff;
+}
