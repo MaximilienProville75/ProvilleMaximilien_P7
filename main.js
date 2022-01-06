@@ -53,6 +53,13 @@ ingredientFilter.addEventListener("keyup", (e) => {
     return ingredient.toLowerCase().includes(searchString);
   });
   displayIngredient(filteredIngredient);
+
+  let ingUlChild = [...new Set(ingredientUl.children)];
+  ingUlChild.forEach((ing) => {
+    ing.addEventListener("click", () => {
+      renderIngredientTag(ing.innerHTML);
+    });
+  });
 });
 
 //! Appareil SearchBar
@@ -63,6 +70,13 @@ appareilFilter.addEventListener("keyup", (e) => {
     return appareil.toLowerCase().includes(searchString);
   });
   displayAppareil(filteredAppareil);
+
+  let appUlChild = [...new Set(appareilUl.children)];
+  appUlChild.forEach((ing) => {
+    ing.addEventListener("click", () => {
+      renderAppareilTag(ing.innerHTML);
+    });
+  });
 });
 
 //! Ustentils SearchBar
@@ -73,6 +87,13 @@ ustensilesFilter.addEventListener("keyup", (e) => {
     return ustentils.toLowerCase().includes(searchString);
   });
   displayUstensiles(filteredUstentiles);
+
+  let ustUlChild = [...new Set(ustensilesUl.children)];
+  ustUlChild.forEach((ing) => {
+    ing.addEventListener("click", () => {
+      renderUstentilesTag(ing.innerHTML);
+    });
+  });
 });
 
 //! Tag Search
@@ -109,11 +130,12 @@ const loadRecipes = async () => {
     });
     singleIngredients = [...new Set(sameIngredients)];
     displayIngredient(singleIngredients);
-    let ingUlChild = [...new Set(ingredientUl.children)];
 
+    let ingUlChild = [...new Set(ingredientUl.children)];
     ingUlChild.forEach((ing) => {
       ing.addEventListener("click", () => {
         renderIngredientTag(ing.innerHTML);
+        tagFilteringRecipe(ing.innerHTML, recipes);
       });
     });
 
@@ -129,6 +151,7 @@ const loadRecipes = async () => {
     appUlChild.forEach((ing) => {
       ing.addEventListener("click", () => {
         renderAppareilTag(ing.innerHTML);
+        tagFilteringRecipe(ing.innerHTML, recipes);
       });
     });
 
@@ -146,8 +169,11 @@ const loadRecipes = async () => {
     ustUlChild.forEach((ing) => {
       ing.addEventListener("click", () => {
         renderUstentilesTag(ing.innerHTML);
+        tagFilteringRecipe(ing.innerHTML, recipes);
       });
     });
+
+    tagFilteringRecipe(tagActive, recipes);
   } catch (err) {
     console.log(err);
   }
@@ -201,10 +227,9 @@ const displayRecipes = (recipes) => {
 const displayIngredient = (ingredients) => {
   const htmlString = ingredients
     .map((ingredient) => {
-      return `<li data-name="${ingredient}">${ingredient}</li>`;
+      return `<div data-name="${ingredient}">${ingredient}</div>`;
     })
     .join("");
-
   ingredientUl.innerHTML = htmlString;
 };
 
@@ -225,30 +250,61 @@ const displayUstensiles = (Ustensiles) => {
 };
 
 //! Tag Display
-// function close(value) {
-//   window.setTimeout(() => {
-//     value.display = "none";
-//   });
-// }
-
 const renderIngredientTag = (ingredient) => {
+  const tagAppearanceX = document.createElement("div");
+  tagAppearanceX.innerHTML = ingredient + `<i class="fas fa-times"></i>`;
+  tagAppearanceX.setAttribute("data-name", ingredient);
+  tagAppearanceX.classList.add("tagAppearanceIngredient");
+  tagAppearanceX.addEventListener("click", () => {
+    close(tagAppearanceX);
+  });
+  tagList.appendChild(tagAppearanceX);
   tagActive.push(ingredient);
-  const htmlString = `<div class="tagAppearanceIngredient">${ingredient} <i class="fas fa-times"></i></div>`;
-  tagList.innerHTML = htmlString;
 };
-
 const renderAppareilTag = (appareil) => {
+  const tagAppearanceX = document.createElement("div");
+  tagAppearanceX.innerHTML = appareil + `<i class="fas fa-times"></i>`;
+  tagAppearanceX.classList.add("tagAppearanceAppliance");
+  tagAppearanceX.addEventListener("click", () => {
+    close(tagAppearanceX);
+  });
+  tagList.appendChild(tagAppearanceX);
   tagActive.push(appareil);
-  const htmlString = `<div class="tagAppearanceAppliance">${appareil} <i class="fas fa-times"></i></div>`;
-  tagList.innerHTML = htmlString;
 };
 
 const renderUstentilesTag = (ustensile) => {
+  const tagAppearanceX = document.createElement("div");
+  tagAppearanceX.innerHTML = ustensile + `<i class="fas fa-times"></i>`;
+  tagAppearanceX.classList.add("tagAppearanceUstensils");
+  tagAppearanceX.addEventListener("click", () => {
+    close(tagAppearanceX);
+  });
+  tagList.appendChild(tagAppearanceX);
   tagActive.push(ustensile);
-  const htmlString = `<div class="tagAppearanceUstensils">${ustensile} <i class="fas fa-times"></i></div>`;
-  tagList.innerHTML = htmlString;
 };
 
+function close(value) {
+  window.setTimeout(() => {
+    value.style.display = "none";
+  });
+}
+
+//! Tag Filtering
+
+const tagFilteringRecipe = (tag, recipes) => {
+  const filteredRecipes = recipes.filter((recipe) => {
+    const arrayIngredient = recipe.ingredients.map((ingredient) => {
+      return ingredient.ingredient.toLowerCase();
+    });
+
+    return (
+      recipe.name.toLowerCase().includes(tag.toLowerCase()) ||
+      arrayIngredient.includes(tag.toLowerCase()) ||
+      recipe.description.toLowerCase().includes(tag.toLowerCase())
+    );
+  });
+  displayRecipes(filteredRecipes);
+};
 console.log(tagActive);
 
 loadRecipes();

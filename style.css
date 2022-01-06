@@ -155,6 +155,8 @@ justify-content: space-between;
 #appareilFilter{
   background-color: #68D9A4;
   color: white;
+  max-width: 650px;
+  max-height: 400px;
 }
 #searchAppreil{
   background-color: #68D9A4;
@@ -166,6 +168,8 @@ justify-content: space-between;
 #ustensilesFilter{
   background-color: #ED6454;
   color: white;
+  max-width: 650px;
+  max-height: 400px;
 }
 #searchUstensiles{
   background-color: #ED6454;
