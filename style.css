@@ -140,12 +140,16 @@ justify-content: space-between;
 #ingredientFilter{
   background-color: #3282F7;
   color: white;
+  max-width: 650px;
+  max-height: 400px;
 }
 #searchIngredient{
   background-color: #3282F7;
   color: white;
 }
-
+#uniIngredient{
+  
+}
 
 /* Appareil */
 #appareilFilter{

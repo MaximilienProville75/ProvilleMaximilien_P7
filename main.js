@@ -22,8 +22,9 @@ const ustensilesFilter = document.getElementById("ustensilesFilter");
 const ustensilesUl = document.getElementById("uniUstensiles");
 
 //Tags
-const tagList = document.getElementById("tagList");
-let tagArray = [];
+let tagList = document.getElementById("tagList");
+
+let tagActive = [];
 
 //! SearchBars Algorithm
 searchBar.addEventListener("keyup", (e) => {
@@ -91,6 +92,8 @@ const loadRecipes = async () => {
     });
     singleIngredients = [...new Set(sameIngredients)];
     displayIngredient(singleIngredients);
+    let ingUlChild = [...new Set(ingredientUl.children)];
+    console.log(ingUlChild);
 
     //* Single Out Appareil
     const recipesAppareil = recipes.filter((recipe) => {
@@ -114,7 +117,6 @@ const loadRecipes = async () => {
   }
 };
 
-//TODO 1] add event listener onclick to show the dropDown menu of filtering
 //TODO 2] add event listener keyup on dropdown research input
 //TODO 3] add array of active tag that later on will be add to searchBar
 //TODO filtering version --> displayRecipes(ActiveTag)
@@ -163,7 +165,7 @@ const displayRecipes = (recipes) => {
 const displayIngredient = (ingredients) => {
   const htmlString = ingredients
     .map((ingredient) => {
-      return `<li >${ingredient}</li>`;
+      return `<li data-name="${ingredient}">${ingredient}</li>`;
     })
     .join("");
 
@@ -173,16 +175,17 @@ const displayIngredient = (ingredients) => {
 const displayAppareil = (appareil) => {
   const htmlString = appareil
     .map((appa) => {
-      return `<li>${appa}</li>`;
+      return `<li data-name="${appa}"">${appa}</li>`;
     })
     .join("");
-
   appareilUl.innerHTML = htmlString;
 };
 
+console.log(tagList);
+
 const displayUstensiles = (Ustensiles) => {
   const htmlString = Ustensiles.map((ust) => {
-    return `<li>${ust}</li>`;
+    return `<li data-name=${ust}>${ust}</li>`;
   }).join("");
   ustensilesUl.innerHTML = htmlString;
 };
@@ -195,18 +198,23 @@ const displayUstensiles = (Ustensiles) => {
 // }
 
 const renderIngredientTag = (ingredient) => {
+  tagActive.push(ingredient);
   const htmlString = `<div class="tagAppearanceIngredient">${ingredient} <i class="fas fa-times"></i></div>`;
-  tagArray.innerHTML = htmlString;
+  tagList.innerHTML = htmlString;
 };
 
 const renderAppareilTag = (appareil) => {
+  tagActive.push(appareil);
   const htmlString = `<div class="tagAppearanceAppliance">${appareil} <i class="fas fa-times"></i></div>`;
-  tagArray.innerHTML = htmlString;
+  tagList.innerHTML = htmlString;
 };
 
 const renderUstentilesTag = (ustensile) => {
+  tagActive.push(ustensile);
   const htmlString = `<div class="tagAppearanceUstensils">${ustensile} <i class="fas fa-times"></i></div>`;
-  tagArray.innerHTML = htmlString;
+  tagList.innerHTML = htmlString;
 };
+
+console.log(tagActive);
 
 loadRecipes();
