@@ -75,6 +75,23 @@ ustensilesFilter.addEventListener("keyup", (e) => {
   displayUstensiles(filteredUstentiles);
 });
 
+//! Tag Search
+tagActive.filter((tag) => {
+  const filteredRecipes = recipes.filter((recipe) => {
+    const arrayIngredient = recipe.ingredients.map((ingredient) => {
+      return ingredient.ingredient.toLowerCase();
+    });
+    console.log(arrayIngredient);
+
+    return (
+      recipe.name.toLowerCase().includes(tag) ||
+      arrayIngredient.includes(tag) ||
+      recipe.description.toLowerCase().includes(tag)
+    );
+  });
+  displayRecipes(filteredRecipes);
+});
+
 //! Fetch Function
 
 const loadRecipes = async () => {
@@ -93,7 +110,12 @@ const loadRecipes = async () => {
     singleIngredients = [...new Set(sameIngredients)];
     displayIngredient(singleIngredients);
     let ingUlChild = [...new Set(ingredientUl.children)];
-    console.log(ingUlChild);
+
+    ingUlChild.forEach((ing) => {
+      ing.addEventListener("click", () => {
+        renderIngredientTag(ing.innerHTML);
+      });
+    });
 
     //* Single Out Appareil
     const recipesAppareil = recipes.filter((recipe) => {
@@ -102,6 +124,13 @@ const loadRecipes = async () => {
     });
     singleAppareil = [...new Set(sameAppareil)];
     displayAppareil(singleAppareil);
+
+    let appUlChild = [...new Set(appareilUl.children)];
+    appUlChild.forEach((ing) => {
+      ing.addEventListener("click", () => {
+        renderAppareilTag(ing.innerHTML);
+      });
+    });
 
     //* Single Out Ustensiles
     const recipesUstensils = recipes.filter((recipe) => {
@@ -112,6 +141,13 @@ const loadRecipes = async () => {
     });
     singleUstensils = [...new Set(sameUstensils)];
     displayUstensiles(singleUstensils);
+
+    let ustUlChild = [...new Set(ustensilesUl.children)];
+    ustUlChild.forEach((ing) => {
+      ing.addEventListener("click", () => {
+        renderUstentilesTag(ing.innerHTML);
+      });
+    });
   } catch (err) {
     console.log(err);
   }
@@ -180,8 +216,6 @@ const displayAppareil = (appareil) => {
     .join("");
   appareilUl.innerHTML = htmlString;
 };
-
-console.log(tagList);
 
 const displayUstensiles = (Ustensiles) => {
   const htmlString = Ustensiles.map((ust) => {
