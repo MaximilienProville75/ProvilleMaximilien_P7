@@ -30,6 +30,7 @@ let tagActive = [];
 searchBar.addEventListener("keyup", (e) => {
   const searchString = e.target.value.toLowerCase();
 
+  // Utiliser sous forme de fonction
   const filteredRecipes = recipes.filter((recipe) => {
     const arrayIngredient = recipe.ingredients.map((ingredient) => {
       return ingredient.ingredient.toLowerCase();
@@ -179,12 +180,7 @@ const loadRecipes = async () => {
   }
 };
 
-//TODO 2] add event listener keyup on dropdown research input
-//TODO 3] add array of active tag that later on will be add to searchBar
-//TODO filtering version --> displayRecipes(ActiveTag)
-
 //! Display Functions
-
 const displayRecipes = (recipes) => {
   const htmlString = recipes
 
@@ -283,9 +279,16 @@ const renderUstentilesTag = (ustensile) => {
   tagActive.push(ustensile);
 };
 
+// TODO
+// Whenever function close is used, the tagActive array must delete that value and load the recipe again without that value in it
+
 function close(value) {
   window.setTimeout(() => {
     value.style.display = "none";
+    const filterTag = tagActive.filter((item) => {
+      return item !== value.textContent;
+    });
+    tagFilteringRecipe(filterTag, recipes);
   });
 }
 
@@ -296,6 +299,8 @@ const tagFilteringRecipe = (tag, recipes) => {
     const arrayIngredient = recipe.ingredients.map((ingredient) => {
       return ingredient.ingredient.toLowerCase();
     });
+
+    console.log(tag);
 
     return (
       recipe.name.toLowerCase().includes(tag.toLowerCase()) ||
