@@ -34,52 +34,61 @@
             id="searchBar"
           />
         </form>
-        <i class="fas fa-search"></i>
+        <i class="fas fa-search" id="icon"></i>
       </div>
       <!-- TagResult -->
       <ul id="tagList"></ul>
       <!-- DROPDOWN FILTER -->
       <div class="dropdownFilters">
         <div id="ingredientFilter">
-          Ingrédient <img src="Media_Ressources/arrowDown.svg" />
           <div id="dropdownIngredient" class="dropdownIngredient">
             <form class="ingredientSearch">
               <input
                 type="text"
                 name="searchBar"
                 class="form-control"
-                placeholder="Rechercher un ingrédient"
+                placeholder="Ingredients"
                 id="searchIngredient"
               />
+              <img
+                class="arrowDropDown1"
+                src="Media_Ressources/arrowDown.svg"
+              />
             </form>
-            <ul id="uniIngredient"></ul>
+            <ul id="uniIngredient" class="ingreidientsList"></ul>
           </div>
         </div>
         <div id="appareilFilter">
-          Appareil <img src="Media_Ressources/arrowDown.svg" />
           <div id="dropdownAppareil" class="dropdownAppareil">
             <form class="AppreilSearch">
               <input
                 type="text"
                 name="searchBar"
                 class="form-control"
-                placeholder="Rechercher un appareil"
+                placeholder="Appareil "
                 id="searchAppreil"
+              />
+              <img
+                class="arrowDropDown2"
+                src="Media_Ressources/arrowDown.svg"
               />
             </form>
             <ul id="uniAppareil"></ul>
           </div>
         </div>
         <div id="ustensilesFilter">
-          Ustentiles <img src="Media_Ressources/arrowDown.svg" />
           <div id="dropdownUstensiles" class="dropdownUstensiles">
             <form class="UstensilesSearch">
               <input
                 type="text"
                 name="searchBar"
                 class="form-control"
-                placeholder="Rechercher un ustensiles"
+                placeholder="Ustentiles"
                 id="searchUstensiles"
+              />
+              <img
+                class="arrowDropDown3"
+                src="Media_Ressources/arrowDown.svg"
               />
             </form>
             <ul id="uniUstensiles"></ul>

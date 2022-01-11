@@ -200,7 +200,7 @@ const displayRecipes = (recipes) => {
                 )}
               </ul>
             </div>
-            <p class="recipeDescription">${recipe.description}</p>
+            <p class="recipeDescription ">${recipe.description}</p>
           </div>
         </div>
     </li>
@@ -237,38 +237,52 @@ const displayUstensiles = (Ustensiles) => {
 
 //! Tag Display
 const renderIngredientTag = (ingredient) => {
+  const globalTagApperance = document.createElement("div");
+  globalTagApperance.classList.add("tagAppearanceIngredient");
   const tagAppearanceX = document.createElement("div");
-  tagAppearanceX.innerHTML = ingredient + `<i class="fas fa-times"></i>`;
-  tagAppearanceX.setAttribute("data-name", ingredient);
-  tagAppearanceX.classList.add("tagAppearanceIngredient");
-  tagAppearanceX.addEventListener("click", () => {
-    close(tagAppearanceX);
+  tagAppearanceX.innerHTML = ingredient;
+  const iconCross = document.createElement("div");
+  iconCross.innerHTML = `<i class="far fa-times-circle"></i>`;
+  globalTagApperance.addEventListener("click", () => {
+    close(globalTagApperance);
     filterNewTagList(tagAppearanceX);
   });
-  tagList.appendChild(tagAppearanceX);
+  globalTagApperance.appendChild(tagAppearanceX);
+  globalTagApperance.appendChild(iconCross);
+  tagList.appendChild(globalTagApperance);
   tagActive.push(ingredient);
 };
 const renderAppareilTag = (appareil) => {
+  const globalTagApperance = document.createElement("div");
+  globalTagApperance.classList.add("tagAppearanceAppliance");
   const tagAppearanceX = document.createElement("div");
-  tagAppearanceX.innerHTML = appareil + `<i class="fas fa-times"></i>`;
-  tagAppearanceX.classList.add("tagAppearanceAppliance");
-  tagAppearanceX.addEventListener("click", () => {
-    close(tagAppearanceX);
+  tagAppearanceX.innerHTML = appareil;
+  const iconCross = document.createElement("div");
+  iconCross.innerHTML = `<i class="far fa-times-circle"></i>`;
+  globalTagApperance.addEventListener("click", () => {
+    close(globalTagApperance);
     filterNewTagList(tagAppearanceX);
   });
-  tagList.appendChild(tagAppearanceX);
+  globalTagApperance.appendChild(tagAppearanceX);
+  globalTagApperance.appendChild(iconCross);
+  tagList.appendChild(globalTagApperance);
   tagActive.push(appareil);
 };
 
 const renderUstentilesTag = (ustensile) => {
+  const globalTagApperance = document.createElement("div");
+  globalTagApperance.classList.add("tagAppearanceUstensils");
   const tagAppearanceX = document.createElement("div");
-  tagAppearanceX.innerHTML = ustensile + `<i class="fas fa-times"></i>`;
-  tagAppearanceX.classList.add("tagAppearanceUstensils");
-  tagAppearanceX.addEventListener("click", () => {
-    close(tagAppearanceX);
+  tagAppearanceX.innerHTML = ustensile;
+  const iconCross = document.createElement("div");
+  iconCross.innerHTML = `<i class="far fa-times-circle"></i>`;
+  globalTagApperance.addEventListener("click", () => {
+    close(globalTagApperance);
     filterNewTagList(tagAppearanceX);
   });
-  tagList.appendChild(tagAppearanceX);
+  globalTagApperance.appendChild(tagAppearanceX);
+  globalTagApperance.appendChild(iconCross);
+  tagList.appendChild(globalTagApperance);
   tagActive.push(ustensile);
 };
 
