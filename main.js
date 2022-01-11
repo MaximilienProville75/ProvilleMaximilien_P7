@@ -97,23 +97,6 @@ ustensilesFilter.addEventListener("keyup", (e) => {
   });
 });
 
-//! Tag Search
-tagActive.filter((tag) => {
-  const filteredRecipes = recipes.filter((recipe) => {
-    const arrayIngredient = recipe.ingredients.map((ingredient) => {
-      return ingredient.ingredient.toLowerCase();
-    });
-    console.log(arrayIngredient);
-
-    return (
-      recipe.name.toLowerCase().includes(tag) ||
-      arrayIngredient.includes(tag) ||
-      recipe.description.toLowerCase().includes(tag)
-    );
-  });
-  displayRecipes(filteredRecipes);
-});
-
 //! Fetch Function
 
 const loadRecipes = async () => {
@@ -149,10 +132,10 @@ const loadRecipes = async () => {
     displayAppareil(singleAppareil);
 
     let appUlChild = [...new Set(appareilUl.children)];
-    appUlChild.forEach((ing) => {
-      ing.addEventListener("click", () => {
-        renderAppareilTag(ing.innerHTML);
-        tagFilteringRecipe(ing.innerHTML, recipes);
+    appUlChild.forEach((app) => {
+      app.addEventListener("click", () => {
+        renderAppareilTag(app.innerHTML);
+        tagFilteringRecipe(app.innerHTML, recipes);
       });
     });
 
@@ -167,10 +150,10 @@ const loadRecipes = async () => {
     displayUstensiles(singleUstensils);
 
     let ustUlChild = [...new Set(ustensilesUl.children)];
-    ustUlChild.forEach((ing) => {
-      ing.addEventListener("click", () => {
-        renderUstentilesTag(ing.innerHTML);
-        tagFilteringRecipe(ing.innerHTML, recipes);
+    ustUlChild.forEach((ust) => {
+      ust.addEventListener("click", () => {
+        renderUstentilesTag(ust.innerHTML);
+        tagFilteringRecipe(ust.innerHTML, recipes);
       });
     });
 
@@ -253,6 +236,7 @@ const renderIngredientTag = (ingredient) => {
   tagAppearanceX.classList.add("tagAppearanceIngredient");
   tagAppearanceX.addEventListener("click", () => {
     close(tagAppearanceX);
+    filterNewTagList(tagAppearanceX);
   });
   tagList.appendChild(tagAppearanceX);
   tagActive.push(ingredient);
@@ -263,6 +247,7 @@ const renderAppareilTag = (appareil) => {
   tagAppearanceX.classList.add("tagAppearanceAppliance");
   tagAppearanceX.addEventListener("click", () => {
     close(tagAppearanceX);
+    filterNewTagList(tagAppearanceX);
   });
   tagList.appendChild(tagAppearanceX);
   tagActive.push(appareil);
@@ -274,6 +259,7 @@ const renderUstentilesTag = (ustensile) => {
   tagAppearanceX.classList.add("tagAppearanceUstensils");
   tagAppearanceX.addEventListener("click", () => {
     close(tagAppearanceX);
+    filterNewTagList(tagAppearanceX);
   });
   tagList.appendChild(tagAppearanceX);
   tagActive.push(ustensile);
@@ -282,15 +268,11 @@ const renderUstentilesTag = (ustensile) => {
 // TODO
 // Whenever function close is used, the tagActive array must delete that value and load the recipe again without that value in it
 
-function close(value) {
+const close = (value) => {
   window.setTimeout(() => {
     value.style.display = "none";
-    const filterTag = tagActive.filter((item) => {
-      return item !== value.textContent;
-    });
-    tagFilteringRecipe(filterTag, recipes);
   });
-}
+};
 
 //! Tag Filtering
 
@@ -300,16 +282,27 @@ const tagFilteringRecipe = (tag, recipes) => {
       return ingredient.ingredient.toLowerCase();
     });
 
-    console.log(tag);
+    const stringTag = String(tag);
+    const tagLower = stringTag.toLowerCase();
 
     return (
-      recipe.name.toLowerCase().includes(tag.toLowerCase()) ||
-      arrayIngredient.includes(tag.toLowerCase()) ||
-      recipe.description.toLowerCase().includes(tag.toLowerCase())
+      recipe.name.toLowerCase().includes(tagLower) ||
+      arrayIngredient.includes(tagLower) ||
+      recipe.description.toLowerCase().includes(tagLower)
     );
   });
   displayRecipes(filteredRecipes);
 };
-console.log(tagActive);
 
 loadRecipes();
+
+const filterNewTagList = (value) => {
+  const index = tagActive.indexOf(value.textContent);
+  if (index > -1) {
+    tagActive.splice(index, 1);
+  }
+
+  tagActive.map((tag) => {
+    tagFilteringRecipe(tag, recipes);
+  });
+};
