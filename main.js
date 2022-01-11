@@ -213,7 +213,7 @@ const displayRecipes = (recipes) => {
 const displayIngredient = (ingredients) => {
   const htmlString = ingredients
     .map((ingredient) => {
-      return `<div data-name="${ingredient}">${ingredient}</div>`;
+      return `<li data-name="${ingredient}">${ingredient}</div>`;
     })
     .join("");
   ingredientUl.innerHTML = htmlString;
@@ -335,6 +335,25 @@ const tagFilteringRecipe = (tag, recipes) => {
   });
 
   displayRecipes(filteredRecipes);
+};
+
+//*DropDown Functions
+
+function dropDownIng() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+window.onclick = function (event) {
+  if (!event.target.matches(".ingredientSearch")) {
+    var dropdowns = document.getElementsByClassName("ingreidientsList");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains("show")) {
+        openDropdown.classList.remove("show");
+      }
+    }
+  }
 };
 
 loadRecipes();

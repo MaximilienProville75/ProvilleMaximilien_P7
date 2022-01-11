@@ -115,9 +115,7 @@ margin-right: 5px;
 justify-content: space-between;
   
 }
-.Ingredients{
-  /* overflow: hidden; */
-}
+
 
 .IngredientSteps p{
   overflow: hidden;
@@ -154,7 +152,7 @@ justify-content: space-between;
 }
 
 /* Ingredients */
-#ingredientFilter{
+.ingredientFilter{
   background-color: #3282F7;
   color: white;
   min-width: 100px;
@@ -187,7 +185,7 @@ justify-content: space-between;
 
 
 
-#uniIngredient{
+.ingreidientsList{
   position: absolute;
 box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 z-index: 1;
@@ -202,6 +200,7 @@ overflow: hidden;
 display: flex;
 flex-direction: column;
 flex-wrap: wrap;
+display: none;
 }
 .arrowDropDown1:hover .ingreidientsList{
   display: block;
@@ -234,7 +233,10 @@ display: flex;
 flex-direction: column;
 flex-wrap: wrap;
 margin-top: 0px;
+display: none;
 }
+
+.show {display:block;}
 
 #searchAppreil{
   background-color: #68D9A4;
@@ -276,6 +278,7 @@ display: flex;
 flex-direction: column;
 flex-wrap: wrap;
 margin-top: 0px;
+display: none;
 }
 
 /* Tags */

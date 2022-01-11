@@ -40,9 +40,13 @@
       <ul id="tagList"></ul>
       <!-- DROPDOWN FILTER -->
       <div class="dropdownFilters">
-        <div id="ingredientFilter">
+        <div
+          id="ingredientFilter"
+          class="dropdownIngredient"
+          onclick="dropDownIng()"
+        >
           <div id="dropdownIngredient" class="dropdownIngredient">
-            <form class="ingredientSearch">
+            <form class="ingredientSearch" onclick="dropDownIng()">
               <input
                 type="text"
                 name="searchBar"
@@ -55,7 +59,9 @@
                 src="Media_Ressources/arrowDown.svg"
               />
             </form>
-            <ul id="uniIngredient" class="ingreidientsList"></ul>
+            <div id="myDropdown" class="dropdown-content">
+              <ul id="uniIngredient" class="ingreidientsList"></ul>
+            </div>
           </div>
         </div>
         <div id="appareilFilter">
