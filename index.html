@@ -40,25 +40,24 @@
       <ul id="tagList"></ul>
       <!-- DROPDOWN FILTER -->
       <div class="dropdownFilters">
-        <div
-          id="ingredientFilter"
-          class="dropdownIngredient"
-          onclick="dropDownIng()"
-        >
+        <div id="ingredientFilter" class="dropdownIngredient">
           <div id="dropdownIngredient" class="dropdownIngredient">
-            <form class="ingredientSearch" onclick="dropDownIng()">
-              <input
-                type="text"
-                name="searchBar"
-                class="form-control"
-                placeholder="Ingredients"
-                id="searchIngredient"
-              />
+            <div class="filterFormImg">
+              <form class="ingredientSearch">
+                <input
+                  type="text"
+                  name="searchBar"
+                  class="form-control"
+                  placeholder="Ingredients"
+                  id="searchIngredient"
+                />
+              </form>
               <img
+                id="arrowDropDown1"
                 class="arrowDropDown1"
                 src="Media_Ressources/arrowDown.svg"
               />
-            </form>
+            </div>
             <div id="myDropdown" class="dropdown-content">
               <ul id="uniIngredient" class="ingreidientsList"></ul>
             </div>
@@ -66,37 +65,43 @@
         </div>
         <div id="appareilFilter">
           <div id="dropdownAppareil" class="dropdownAppareil">
-            <form class="AppreilSearch">
-              <input
-                type="text"
-                name="searchBar"
-                class="form-control"
-                placeholder="Appareil "
-                id="searchAppreil"
-              />
+            <div class="filterFormImg">
+              <form class="AppreilSearch">
+                <input
+                  type="text"
+                  name="searchBar"
+                  class="form-control"
+                  placeholder="Appareil "
+                  id="searchAppreil"
+                />
+              </form>
               <img
+                id="arrowDropDown2"
                 class="arrowDropDown2"
                 src="Media_Ressources/arrowDown.svg"
               />
-            </form>
+            </div>
             <ul id="uniAppareil"></ul>
           </div>
         </div>
         <div id="ustensilesFilter">
           <div id="dropdownUstensiles" class="dropdownUstensiles">
-            <form class="UstensilesSearch">
-              <input
-                type="text"
-                name="searchBar"
-                class="form-control"
-                placeholder="Ustentiles"
-                id="searchUstensiles"
-              />
+            <div class="filterFormImg">
+              <form class="UstensilesSearch">
+                <input
+                  type="text"
+                  name="searchBar"
+                  class="form-control"
+                  placeholder="Ustentiles"
+                  id="searchUstensiles"
+                />
+              </form>
               <img
+                id="arrowDropDown3"
                 class="arrowDropDown3"
                 src="Media_Ressources/arrowDown.svg"
               />
-            </form>
+            </div>
             <ul id="uniUstensiles"></ul>
           </div>
         </div>

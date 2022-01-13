@@ -320,8 +320,6 @@ const tagFilteringRecipe = (tag, recipes) => {
     const arrayUstentils = recipe.ustensils.map((us) => {
       return us.toLowerCase();
     });
-
-    console.log(recipe);
     const stringTag = String(tag);
     const tagLower = stringTag.toLowerCase();
 
@@ -338,22 +336,39 @@ const tagFilteringRecipe = (tag, recipes) => {
 };
 
 //*DropDown Functions
+// console.log(dropDownBtn1);
 
-function dropDownIng() {
-  document.getElementById("myDropdown").classList.toggle("show");
+// const dropDownClick = (dropDownBtn1) => {
+//   dropDownBtn1.addEventListener("onclick", (e) => {
+//     e.preventDefault;
+//     console.log("blabla");
+//   });
+// };
+
+// dropDownClick(dropDownBtn1);
+
+function clgBla() {
+  console.log("hahahaha");
 }
 
-window.onclick = function (event) {
-  if (!event.target.matches(".ingredientSearch")) {
-    var dropdowns = document.getElementsByClassName("ingreidientsList");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains("show")) {
-        openDropdown.classList.remove("show");
-      }
-    }
-  }
+// function dropDownIng() {
+//   document.getElementById("uniIngredient").classList.toggle("show");
+// }
+const dropDownBtn1 = document.getElementById("arrowDropDown1");
+const dropDownBtn2 = document.getElementById("arrowDropDown2");
+const dropDownBtn3 = document.getElementById("arrowDropDown3");
+
+dropDownBtn1.onclick = function () {
+  document.getElementById("uniIngredient").classList.toggle("show");
+  dropDownBtn1.classList.toggle("rotate");
+};
+dropDownBtn2.onclick = function () {
+  document.getElementById("uniAppareil").classList.toggle("show");
+  dropDownBtn2.classList.toggle("rotate");
+};
+dropDownBtn3.onclick = function () {
+  document.getElementById("uniUstensiles").classList.toggle("show");
+  dropDownBtn3.classList.toggle("rotate");
 };
 
 loadRecipes();
