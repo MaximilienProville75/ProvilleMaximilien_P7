@@ -66,8 +66,8 @@ ingredientFilter.addEventListener("keyup", (e) => {
       filterNewTagList(ing.innerHTML);
     });
   });
-  document.getElementById("uniIngredient").classList.toggle("show");
-  dropDownBtn1.classList.toggle("rotate");
+  document.getElementById("uniIngredient").classList.add("show");
+  dropDownBtn1.classList.add("rotate");
 });
 
 //! Appareil SearchBar
@@ -86,6 +86,8 @@ appareilFilter.addEventListener("keyup", (e) => {
       filterNewTagList(ing.innerHTML);
     });
   });
+  document.getElementById("uniAppareil").classList.add("show");
+  dropDownBtn2.classList.add("rotate");
 });
 
 //! Ustentils SearchBar
@@ -104,6 +106,8 @@ ustensilesFilter.addEventListener("keyup", (e) => {
       filterNewTagList(ing.innerHTML);
     });
   });
+  document.getElementById("uniUstensiles").classList.add("show");
+  dropDownBtn3.classList.add("rotate");
 });
 
 //! Fetch Function
