@@ -168,7 +168,7 @@ justify-content: space-between;
 
 
 
-.show {display:block;}
+.show {display:flex;}
 
 /* Ingredients */
 .ingredientFilter{
@@ -215,7 +215,7 @@ box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 z-index: 1;
 margin-top: 0px;
 background-color: #3282F7;
-max-width: 652px;
+max-width: 642px;
 max-height: 320px;
 display: -webkit-box;
 -webkit-line-clamp: 160;
@@ -228,24 +228,22 @@ display: none;
 width: 100%;
 color: white;
 list-style-type: none;
-margin-left: -30px; 
+padding: 10px;
 }
 .AppareilList{
   position: absolute;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  margin-top: 0px;
+  margin-top: -1px;
   background-color: #68D9A4;
-  max-width: 652px;
+  width: 230px;
   max-height: 320px;
-  display: -webkit-box;
-  -webkit-line-clamp: 160;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   display: none;
+  list-style: none;
+  padding: 10px;
 }
 
 .ustentilsList{
@@ -264,6 +262,9 @@ margin-left: -30px;
   flex-direction: column;
   flex-wrap: wrap;
   display: none;
+  list-style: none;
+padding: 10px;
+min-width: 310px;
 }
 /* Appareil */
 #appareilFilter{
@@ -275,27 +276,9 @@ margin-left: -30px;
   border-radius: 5px;
 }
 
-#uniAppareil{
-  display: none;
-  position: absolute;
-  background-color: #68D9A4;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  max-width: 652px;
-max-height: 320px;
-display: -webkit-box;
--webkit-line-clamp: 160;
--webkit-box-orient: vertical;
-overflow: hidden;
-display: flex;
-flex-direction: column;
-flex-wrap: wrap;
-margin-top: 0px;
-display: none;
-}
 
-.show {display:block;}
+
+.show {display:flex;}
 
 #searchAppreil{
   background-color: #68D9A4;
@@ -320,25 +303,7 @@ display: none;
   border-radius: 5px;
 }
 
-#uniUstensiles{
-  display: none;
-  position: absolute;
-  background-color: #ED6454;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  max-width: 652px;
-max-height: 320px;
-display: -webkit-box;
--webkit-line-clamp: 160;
--webkit-box-orient: vertical;
-overflow: hidden;
-display: flex;
-flex-direction: column;
-flex-wrap: wrap;
-margin-top: 0px;
-display: none;
-}
+
 
 /* Tags */
 #tagList{

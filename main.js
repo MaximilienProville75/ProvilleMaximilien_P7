@@ -66,6 +66,8 @@ ingredientFilter.addEventListener("keyup", (e) => {
       filterNewTagList(ing.innerHTML);
     });
   });
+  document.getElementById("uniIngredient").classList.toggle("show");
+  dropDownBtn1.classList.toggle("rotate");
 });
 
 //! Appareil SearchBar
@@ -222,7 +224,7 @@ const displayIngredient = (ingredients) => {
 const displayAppareil = (appareil) => {
   const htmlString = appareil
     .map((appa) => {
-      return `<li data-name="${appa}"">${appa}</li>`;
+      return `<li data-name="${appa}">${appa}</li>`;
     })
     .join("");
   appareilUl.innerHTML = htmlString;
@@ -230,7 +232,7 @@ const displayAppareil = (appareil) => {
 
 const displayUstensiles = (Ustensiles) => {
   const htmlString = Ustensiles.map((ust) => {
-    return `<li data-name=${ust}>${ust}</li>`;
+    return `<li data-name="${ust}">${ust}</li>`;
   }).join("");
   ustensilesUl.innerHTML = htmlString;
 };
@@ -336,24 +338,7 @@ const tagFilteringRecipe = (tag, recipes) => {
 };
 
 //*DropDown Functions
-// console.log(dropDownBtn1);
 
-// const dropDownClick = (dropDownBtn1) => {
-//   dropDownBtn1.addEventListener("onclick", (e) => {
-//     e.preventDefault;
-//     console.log("blabla");
-//   });
-// };
-
-// dropDownClick(dropDownBtn1);
-
-function clgBla() {
-  console.log("hahahaha");
-}
-
-// function dropDownIng() {
-//   document.getElementById("uniIngredient").classList.toggle("show");
-// }
 const dropDownBtn1 = document.getElementById("arrowDropDown1");
 const dropDownBtn2 = document.getElementById("arrowDropDown2");
 const dropDownBtn3 = document.getElementById("arrowDropDown3");
