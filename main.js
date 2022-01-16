@@ -340,21 +340,26 @@ const tagFilteringRecipe = (tag, recipes) => {
 
   let ingArr = [];
   let appArr = [];
-
+  let ustArr = [];
   filteredRecipes.map((recipe) => {
     const recipeIng = recipe.ingredients;
     const recipeApp = recipe.appliance;
+    const recipeUst = recipe.ustensils;
     recipeIng.map((ing) => {
       const singleIng = ing.ingredient;
-      console.log(singleIng);
       ingArr.push(singleIng);
+    });
+    recipeUst.map((ust) => {
+      ustArr.push(ust);
     });
     appArr.push(recipeApp);
   });
+  let singleUst = [...new Set(ustArr)];
   let singleApp = [...new Set(appArr)];
 
   displayAppareil(singleApp);
   displayIngredient(ingArr);
+  displayUstensiles(singleUst);
 
   let ingUlChild = [...new Set(ingredientUl.children)];
   ingUlChild.forEach((ing) => {
@@ -372,8 +377,13 @@ const tagFilteringRecipe = (tag, recipes) => {
     });
   });
 
-  console.log(filteredRecipes);
-
+  let ustUlChild = [...new Set(ustensilesUl.children)];
+  ustUlChild.forEach((ust) => {
+    ust.addEventListener("click", () => {
+      renderUstentilesTag(ust.innerHTML);
+      filterNewTagList(ust.innerHTML);
+    });
+  });
   displayRecipes(filteredRecipes);
 };
 
