@@ -338,6 +338,42 @@ const tagFilteringRecipe = (tag, recipes) => {
     );
   });
 
+  let ingArr = [];
+  let appArr = [];
+
+  filteredRecipes.map((recipe) => {
+    const recipeIng = recipe.ingredients;
+    const recipeApp = recipe.appliance;
+    recipeIng.map((ing) => {
+      const singleIng = ing.ingredient;
+      console.log(singleIng);
+      ingArr.push(singleIng);
+    });
+    appArr.push(recipeApp);
+  });
+  let singleApp = [...new Set(appArr)];
+
+  displayAppareil(singleApp);
+  displayIngredient(ingArr);
+
+  let ingUlChild = [...new Set(ingredientUl.children)];
+  ingUlChild.forEach((ing) => {
+    ing.addEventListener("click", () => {
+      renderIngredientTag(ing.innerHTML);
+      filterNewTagList(ing.innerHTML);
+    });
+  });
+
+  let appUlChild = [...new Set(appareilUl.children)];
+  appUlChild.forEach((ing) => {
+    ing.addEventListener("click", () => {
+      renderAppareilTag(ing.innerHTML);
+      filterNewTagList(ing.innerHTML);
+    });
+  });
+
+  console.log(filteredRecipes);
+
   displayRecipes(filteredRecipes);
 };
 
