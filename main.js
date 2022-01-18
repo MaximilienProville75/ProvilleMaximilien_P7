@@ -23,7 +23,6 @@ const ustensilesUl = document.getElementById("uniUstensiles");
 
 //Tags
 let tagList = document.getElementById("tagList");
-
 let tagActive = [];
 
 //! SearchBars Algorithm
@@ -47,6 +46,7 @@ searchBar.addEventListener("keyup", (e) => {
       arrayUstentils.includes(searchString)
     );
   });
+  tagFilteringRecipe(tagActive, filteredRecipes);
   displayRecipes(filteredRecipes);
 });
 
@@ -119,9 +119,9 @@ const loadRecipes = async () => {
     displayRecipes(recipes);
 
     //* Single Out Ingredients
-    const recipesIngredients = recipes.filter((recipe) => {
+    recipes.forEach((recipe) => {
       const multipleIngRecipes = recipe.ingredients;
-      multipleIngRecipes.filter((recipe) => {
+      multipleIngRecipes.forEach((recipe) => {
         sameIngredients.push(recipe.ingredient);
       });
     });
@@ -137,7 +137,7 @@ const loadRecipes = async () => {
     });
 
     //* Single Out Appareil
-    const recipesAppareil = recipes.filter((recipe) => {
+    recipes.forEach((recipe) => {
       const multipleApp = recipe.appliance;
       sameAppareil.push(multipleApp);
     });
@@ -153,9 +153,9 @@ const loadRecipes = async () => {
     });
 
     //* Single Out Ustensiles
-    const recipesUstensils = recipes.filter((recipe) => {
+    recipes.forEach((recipe) => {
       const multipleUst = recipe.ustensils;
-      multipleUst.filter((ust) => {
+      multipleUst.forEach((ust) => {
         sameUstensils.push(ust);
       });
     });
@@ -300,21 +300,21 @@ const close = (value) => {
 
 //! Tag Filtering
 
-//Todo : Rebuild the filterFunction to make sure tags match with each other
-//todo --> or not charge again if they don't
-
 const filterNewTagList = (value) => {
   const index = tagActive.indexOf(value.textContent);
   if (index > -1) {
     tagActive.splice(index, 1);
   }
 
-  tagActive.map((tag) => {
+  tagActive.forEach((tag) => {
     tagFilteringRecipe(tag, recipes);
   });
 
   if (tagActive.length === 0) {
     displayRecipes(recipes);
+    displayAppareil(singleAppareil);
+    displayIngredient(singleIngredients);
+    displayUstensiles(singleUstensils);
   }
 };
 
@@ -328,15 +328,16 @@ const tagFilteringRecipe = (tag, recipes) => {
     });
     const stringTag = String(tag);
     const tagLower = stringTag.toLowerCase();
-
     return (
-      recipe.name.toLowerCase().includes(tagLower) ||
+      // recipe.name.toLowerCase().includes(tagLower) ||
       arrayIngredient.includes(tagLower) ||
-      recipe.description.toLowerCase().includes(tagLower) ||
+      // recipe.description.toLowerCase().includes(tagLower) ||
       recipe.appliance.toLowerCase().includes(tagLower) ||
       arrayUstentils.includes(tagLower)
     );
   });
+
+  console.log(filteredRecipes);
 
   let ingArr = [];
   let appArr = [];
@@ -368,14 +369,16 @@ const tagFilteringRecipe = (tag, recipes) => {
       filterNewTagList(ing.innerHTML);
     });
   });
+  console.log(ingUlChild);
 
   let appUlChild = [...new Set(appareilUl.children)];
-  appUlChild.forEach((ing) => {
-    ing.addEventListener("click", () => {
-      renderAppareilTag(ing.innerHTML);
-      filterNewTagList(ing.innerHTML);
+  appUlChild.forEach((app) => {
+    app.addEventListener("click", () => {
+      renderAppareilTag(app.innerHTML);
+      filterNewTagList(app.innerHTML);
     });
   });
+  console.log(appUlChild);
 
   let ustUlChild = [...new Set(ustensilesUl.children)];
   ustUlChild.forEach((ust) => {
@@ -384,6 +387,7 @@ const tagFilteringRecipe = (tag, recipes) => {
       filterNewTagList(ust.innerHTML);
     });
   });
+  console.log(ustUlChild);
   displayRecipes(filteredRecipes);
 };
 
