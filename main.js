@@ -300,12 +300,12 @@ const close = (value) => {
 
 //! Tag Filtering
 
-const filterNewTagList = (value) => {
-  const index = tagActive.indexOf(value.textContent);
+const filterNewTagList = (tagValue) => {
+  const index = tagActive.indexOf(tagValue.textContent);
   if (index > -1) {
     tagActive.splice(index, 1);
   }
-
+  console.log(tagValue);
   tagActive.forEach((tag) => {
     tagFilteringRecipe(tag, recipes);
   });
@@ -318,8 +318,10 @@ const filterNewTagList = (value) => {
   }
 };
 
+let filteredRecipes;
+let recipesFiltering = [];
 const tagFilteringRecipe = (tag, recipes) => {
-  const filteredRecipes = recipes.filter((recipe) => {
+  filteredRecipes = recipes.filter((recipe) => {
     const arrayIngredient = recipe.ingredients.map((ingredient) => {
       return ingredient.ingredient.toLowerCase();
     });
@@ -328,20 +330,18 @@ const tagFilteringRecipe = (tag, recipes) => {
     });
     const stringTag = String(tag);
     const tagLower = stringTag.toLowerCase();
+
     return (
-      // recipe.name.toLowerCase().includes(tagLower) ||
       arrayIngredient.includes(tagLower) ||
-      // recipe.description.toLowerCase().includes(tagLower) ||
       recipe.appliance.toLowerCase().includes(tagLower) ||
       arrayUstentils.includes(tagLower)
     );
   });
 
-  console.log(filteredRecipes);
-
   let ingArr = [];
   let appArr = [];
   let ustArr = [];
+  let commonTagArray = [];
   filteredRecipes.map((recipe) => {
     const recipeIng = recipe.ingredients;
     const recipeApp = recipe.appliance;
@@ -364,33 +364,55 @@ const tagFilteringRecipe = (tag, recipes) => {
 
   let ingUlChild = [...new Set(ingredientUl.children)];
   ingUlChild.forEach((ing) => {
+    commonTagArray.push(ing);
     ing.addEventListener("click", () => {
       renderIngredientTag(ing.innerHTML);
       filterNewTagList(ing.innerHTML);
     });
   });
-  console.log(ingUlChild);
 
   let appUlChild = [...new Set(appareilUl.children)];
   appUlChild.forEach((app) => {
+    commonTagArray.push(app);
     app.addEventListener("click", () => {
       renderAppareilTag(app.innerHTML);
       filterNewTagList(app.innerHTML);
     });
   });
-  console.log(appUlChild);
 
   let ustUlChild = [...new Set(ustensilesUl.children)];
   ustUlChild.forEach((ust) => {
+    commonTagArray.push(ust);
     ust.addEventListener("click", () => {
       renderUstentilesTag(ust.innerHTML);
       filterNewTagList(ust.innerHTML);
     });
   });
-  console.log(ustUlChild);
-  displayRecipes(filteredRecipes);
-};
 
+  // // FIltering Base on new Tag generation
+  // filteredRecipes2 = filteredRecipes.filter((recipe) => {
+  //   const singleTagSelected = commonTagArray.map((tag) => {
+  //     return tag.innerHTML.toLowerCase();
+  //   });
+  //   console.log(singleTagSelected);
+
+  //   const arrayIngredient = recipe.ingredients.map((ingredient) => {
+  //     return ingredient.ingredient.toLowerCase();
+  //   });
+
+  //   const arrayUstentils = recipe.ustensils.map((us) => {
+  //     return us.toLowerCase();
+  //   });
+
+  //   return (
+  //     arrayIngredient.includes(singleTagSelected) ||
+  //     recipe.appliance.toLowerCase().includes(singleTagSelected) ||
+  //     arrayUstentils.includes(singleTagSelected)
+  //   );
+  // });
+  displayRecipes(filteredRecipes);
+  console.log(filteredRecipes);
+};
 //*DropDown Functions
 
 const dropDownBtn1 = document.getElementById("arrowDropDown1");
