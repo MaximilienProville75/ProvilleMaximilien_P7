@@ -319,7 +319,6 @@ const filterNewTagList = (tagValue) => {
 };
 
 let filteredRecipes;
-let recipesFiltering = [];
 const tagFilteringRecipe = (tag, recipes) => {
   filteredRecipes = recipes.filter((recipe) => {
     const arrayIngredient = recipe.ingredients.map((ingredient) => {
