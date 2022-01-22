@@ -305,7 +305,7 @@ const filterNewTagList = (tagValue, recipesArr = recipes) => {
   if (index > -1) {
     tagActive.splice(index, 1);
   }
-  console.log(tagValue.textContent);
+
   tagActive.forEach((tag) => {
     tagFilteringRecipe(tag, recipesArr);
   });
@@ -388,7 +388,6 @@ const tagFilteringRecipe = (tag, recipes) => {
   });
 
   displayRecipes(filteredRecipes);
-  console.log(filteredRecipes);
 };
 
 //*DropDown Functions
