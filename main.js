@@ -242,7 +242,7 @@ const displayUstensiles = (Ustensiles) => {
 };
 
 //! Tag Display
-const renderIngredientTag = (ingredient) => {
+const renderIngredientTag = (ingredient, recipesArr = null) => {
   const globalTagApperance = document.createElement("div");
   globalTagApperance.classList.add("tagAppearanceIngredient");
   const tagAppearanceX = document.createElement("div");
@@ -251,14 +251,14 @@ const renderIngredientTag = (ingredient) => {
   iconCross.innerHTML = `<i class="far fa-times-circle"></i>`;
   globalTagApperance.addEventListener("click", () => {
     close(globalTagApperance);
-    filterNewTagList(tagAppearanceX);
+    filterNewTagList(tagAppearanceX, recipesArr);
   });
   globalTagApperance.appendChild(tagAppearanceX);
   globalTagApperance.appendChild(iconCross);
   tagList.appendChild(globalTagApperance);
   tagActive.push(ingredient);
 };
-const renderAppareilTag = (appareil) => {
+const renderAppareilTag = (appareil, recipesArr = null) => {
   const globalTagApperance = document.createElement("div");
   globalTagApperance.classList.add("tagAppearanceAppliance");
   const tagAppearanceX = document.createElement("div");
@@ -267,7 +267,7 @@ const renderAppareilTag = (appareil) => {
   iconCross.innerHTML = `<i class="far fa-times-circle"></i>`;
   globalTagApperance.addEventListener("click", () => {
     close(globalTagApperance);
-    filterNewTagList(tagAppearanceX);
+    filterNewTagList(tagAppearanceX, recipesArr);
   });
   globalTagApperance.appendChild(tagAppearanceX);
   globalTagApperance.appendChild(iconCross);
@@ -275,7 +275,7 @@ const renderAppareilTag = (appareil) => {
   tagActive.push(appareil);
 };
 
-const renderUstentilesTag = (ustensile) => {
+const renderUstentilesTag = (ustensile, recipesArr = null) => {
   const globalTagApperance = document.createElement("div");
   globalTagApperance.classList.add("tagAppearanceUstensils");
   const tagAppearanceX = document.createElement("div");
@@ -284,7 +284,7 @@ const renderUstentilesTag = (ustensile) => {
   iconCross.innerHTML = `<i class="far fa-times-circle"></i>`;
   globalTagApperance.addEventListener("click", () => {
     close(globalTagApperance);
-    filterNewTagList(tagAppearanceX);
+    filterNewTagList(tagAppearanceX, recipesArr);
   });
   globalTagApperance.appendChild(tagAppearanceX);
   globalTagApperance.appendChild(iconCross);
@@ -364,7 +364,7 @@ const tagFilteringRecipe = (tag, recipes) => {
   ingUlChild.forEach((ing) => {
     commonTagArray.push(ing);
     ing.addEventListener("click", () => {
-      renderIngredientTag(ing.innerHTML);
+      renderIngredientTag(ing.innerHTML, filteredRecipes);
       filterNewTagList(ing.innerHTML, filteredRecipes);
     });
   });
@@ -373,7 +373,7 @@ const tagFilteringRecipe = (tag, recipes) => {
   appUlChild.forEach((app) => {
     commonTagArray.push(app);
     app.addEventListener("click", () => {
-      renderAppareilTag(app.innerHTML);
+      renderAppareilTag(app.innerHTML, filteredRecipes);
       filterNewTagList(app.innerHTML, filteredRecipes);
     });
   });
@@ -382,7 +382,7 @@ const tagFilteringRecipe = (tag, recipes) => {
   ustUlChild.forEach((ust) => {
     commonTagArray.push(ust);
     ust.addEventListener("click", () => {
-      renderUstentilesTag(ust.innerHTML);
+      renderUstentilesTag(ust.innerHTML, filteredRecipes);
       filterNewTagList(ust.innerHTML, filteredRecipes);
     });
   });
