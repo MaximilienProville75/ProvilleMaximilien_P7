@@ -300,14 +300,14 @@ const close = (value) => {
 
 //! Tag Filtering
 
-const filterNewTagList = (tagValue) => {
+const filterNewTagList = (tagValue, recipesArr = recipes) => {
   const index = tagActive.indexOf(tagValue.textContent);
   if (index > -1) {
     tagActive.splice(index, 1);
   }
   console.log(tagValue.textContent);
   tagActive.forEach((tag) => {
-    tagFilteringRecipe(tag, recipes);
+    tagFilteringRecipe(tag, recipesArr);
   });
 
   if (tagActive.length === 0) {
@@ -365,7 +365,7 @@ const tagFilteringRecipe = (tag, recipes) => {
     commonTagArray.push(ing);
     ing.addEventListener("click", () => {
       renderIngredientTag(ing.innerHTML);
-      filterNewTagList(ing.innerHTML);
+      filterNewTagList(ing.innerHTML, filteredRecipes);
     });
   });
 
@@ -374,7 +374,7 @@ const tagFilteringRecipe = (tag, recipes) => {
     commonTagArray.push(app);
     app.addEventListener("click", () => {
       renderAppareilTag(app.innerHTML);
-      filterNewTagList(app.innerHTML);
+      filterNewTagList(app.innerHTML, filteredRecipes);
     });
   });
 
@@ -383,7 +383,7 @@ const tagFilteringRecipe = (tag, recipes) => {
     commonTagArray.push(ust);
     ust.addEventListener("click", () => {
       renderUstentilesTag(ust.innerHTML);
-      filterNewTagList(ust.innerHTML);
+      filterNewTagList(ust.innerHTML, filteredRecipes);
     });
   });
 
