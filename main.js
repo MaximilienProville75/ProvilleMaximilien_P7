@@ -42,6 +42,7 @@ searchBar.addEventListener("keyup", (e) => {
       recipe.name.toLowerCase().includes(searchString) ||
       arrayIngredient.includes(searchString) ||
       recipe.description.toLowerCase().includes(searchString) ||
+      // 46-47 INUTILES
       recipe.appliance.toLowerCase().includes(searchString) ||
       arrayUstentils.includes(searchString)
     );
@@ -114,7 +115,7 @@ ustensilesFilter.addEventListener("keyup", (e) => {
 
 const loadRecipes = async () => {
   try {
-    const res = await fetch("/recipes.json");
+    const res = await fetch("./recipes.json");
     recipes = await res.json();
     displayRecipes(recipes);
 
