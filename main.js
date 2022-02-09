@@ -41,14 +41,12 @@ searchBar.addEventListener("keyup", (e) => {
     return (
       recipe.name.toLowerCase().includes(searchString) ||
       arrayIngredient.includes(searchString) ||
-      recipe.description.toLowerCase().includes(searchString) ||
-      // 46-47 INUTILES
-      recipe.appliance.toLowerCase().includes(searchString) ||
-      arrayUstentils.includes(searchString)
+      recipe.description.toLowerCase().includes(searchString)
     );
   });
   tagFilteringRecipe(tagActive, filteredRecipes);
   displayRecipes(filteredRecipes);
+  console.log(searchString);
 });
 
 //! Ingredient SearchBar
@@ -118,59 +116,6 @@ const loadRecipes = async () => {
     const res = await fetch("./recipes.json");
     recipes = await res.json();
     displayRecipes(recipes);
-
-    //* Single Out Ingredients
-    recipes.forEach((recipe) => {
-      const multipleIngRecipes = recipe.ingredients;
-      multipleIngRecipes.forEach((recipe) => {
-        sameIngredients.push(recipe.ingredient);
-      });
-    });
-    singleIngredients = [...new Set(sameIngredients)];
-    displayIngredient(singleIngredients);
-
-    let ingUlChild = [...new Set(ingredientUl.children)];
-    ingUlChild.forEach((ing) => {
-      ing.addEventListener("click", () => {
-        renderIngredientTag(ing.innerHTML);
-        filterNewTagList(ing.innerHTML);
-      });
-    });
-
-    //* Single Out Appareil
-    recipes.forEach((recipe) => {
-      const multipleApp = recipe.appliance;
-      sameAppareil.push(multipleApp);
-    });
-    singleAppareil = [...new Set(sameAppareil)];
-    displayAppareil(singleAppareil);
-
-    let appUlChild = [...new Set(appareilUl.children)];
-    appUlChild.forEach((app) => {
-      app.addEventListener("click", () => {
-        renderAppareilTag(app.innerHTML);
-        filterNewTagList(app.innerHTML);
-      });
-    });
-
-    //* Single Out Ustensiles
-    recipes.forEach((recipe) => {
-      const multipleUst = recipe.ustensils;
-      multipleUst.forEach((ust) => {
-        sameUstensils.push(ust);
-      });
-    });
-    singleUstensils = [...new Set(sameUstensils)];
-    displayUstensiles(singleUstensils);
-
-    let ustUlChild = [...new Set(ustensilesUl.children)];
-    ustUlChild.forEach((ust) => {
-      ust.addEventListener("click", () => {
-        renderUstentilesTag(ust.innerHTML);
-        filterNewTagList(ust.innerHTML);
-      });
-    });
-
     tagFilteringRecipe(tagActive, recipes);
   } catch (err) {
     console.log(err);
@@ -312,10 +257,75 @@ const filterNewTagList = (tagValue, recipesArr = recipes) => {
   });
 
   if (tagActive.length === 0) {
-    displayRecipes(recipes);
-    displayAppareil(singleAppareil);
+    const searchString = searchBar.value;
+
+    const filteredRecipes = recipes.filter((recipe) => {
+      const arrayIngredient = recipe.ingredients.map((ingredient) => {
+        return ingredient.ingredient.toLowerCase();
+      });
+      const arrayUstentils = recipe.ustensils.map((us) => {
+        return us.toLowerCase();
+      });
+
+      return (
+        recipe.name.toLowerCase().includes(searchString) ||
+        arrayIngredient.includes(searchString) ||
+        recipe.description.toLowerCase().includes(searchString)
+      );
+    });
+
+    recipes.forEach((recipe) => {
+      const multipleIngRecipes = recipe.ingredients;
+      multipleIngRecipes.forEach((recipe) => {
+        sameIngredients.push(recipe.ingredient);
+      });
+    });
+    singleIngredients = [...new Set(sameIngredients)];
+    singleIngredients.sort();
     displayIngredient(singleIngredients);
+
+    let ingUlChild = [...new Set(ingredientUl.children)];
+    ingUlChild.forEach((ing) => {
+      ing.addEventListener("click", () => {
+        renderIngredientTag(ing.innerHTML);
+        filterNewTagList(ing.innerHTML);
+      });
+    });
+
+    //* Single Out Appareil
+    recipes.forEach((recipe) => {
+      const multipleApp = recipe.appliance;
+      sameAppareil.push(multipleApp);
+    });
+    singleAppareil = [...new Set(sameAppareil)];
+    displayAppareil(singleAppareil);
+
+    let appUlChild = [...new Set(appareilUl.children)];
+    appUlChild.forEach((app) => {
+      app.addEventListener("click", () => {
+        renderAppareilTag(app.innerHTML);
+        filterNewTagList(app.innerHTML);
+      });
+    });
+
+    //* Single Out Ustensiles
+    recipes.forEach((recipe) => {
+      const multipleUst = recipe.ustensils;
+      multipleUst.forEach((ust) => {
+        sameUstensils.push(ust);
+      });
+    });
+    singleUstensils = [...new Set(sameUstensils)];
     displayUstensiles(singleUstensils);
+
+    let ustUlChild = [...new Set(ustensilesUl.children)];
+    ustUlChild.forEach((ust) => {
+      ust.addEventListener("click", () => {
+        renderUstentilesTag(ust.innerHTML);
+        filterNewTagList(ust.innerHTML);
+      });
+    });
+    displayRecipes(filteredRecipes);
   }
 };
 
@@ -354,11 +364,13 @@ const tagFilteringRecipe = (tag, recipes) => {
     });
     appArr.push(recipeApp);
   });
-  let singleUst = [...new Set(ustArr)];
-  let singleApp = [...new Set(appArr)];
+
+  let soloIng = [...new Set(ingArr)].sort();
+  let singleUst = [...new Set(ustArr)].sort();
+  let singleApp = [...new Set(appArr)].sort();
 
   displayAppareil(singleApp);
-  displayIngredient(ingArr);
+  displayIngredient(soloIng);
   displayUstensiles(singleUst);
 
   let ingUlChild = [...new Set(ingredientUl.children)];
