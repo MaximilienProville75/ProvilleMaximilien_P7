@@ -39,8 +39,8 @@
       <!-- TagResult -->
       <ul id="tagList"></ul>
       <!-- DROPDOWN FILTER -->
-      <div class="dropdownFilters">
-        <div id="ingredientFilter" class="dropdownIngredient">
+      <section class="dropdownFilters">
+        <article id="ingredientFilter" class="article-ingredients">
           <div id="dropdownIngredient" class="dropdownIngredient">
             <div class="filterFormImg">
               <form class="ingredientSearch">
@@ -57,13 +57,11 @@
                 class="arrowDropDown1"
                 src="Media_Ressources/arrowDown.svg"
               />
-            </div>
-            <div id="myDropdown" class="dropdown-content">
               <ul id="uniIngredient" class="ingreidientsList"></ul>
             </div>
           </div>
-        </div>
-        <div id="appareilFilter">
+        </article>
+        <article id="appareilFilter">
           <div id="dropdownAppareil" class="dropdownAppareil">
             <div class="filterFormImg">
               <form class="AppreilSearch">
@@ -74,17 +72,18 @@
                   placeholder="Appareil "
                   id="searchAppreil"
                 />
+                <img
+                  id="arrowDropDown2"
+                  class="arrowDropDown2"
+                  src="Media_Ressources/arrowDown.svg"
+                />
               </form>
-              <img
-                id="arrowDropDown2"
-                class="arrowDropDown2"
-                src="Media_Ressources/arrowDown.svg"
-              />
             </div>
+
             <ul id="uniAppareil" class="AppareilList"></ul>
           </div>
-        </div>
-        <div id="ustensilesFilter">
+        </article>
+        <article id="ustensilesFilter">
           <div id="dropdownUstensiles" class="dropdownUstensiles">
             <div class="filterFormImg">
               <form class="UstensilesSearch">
@@ -102,12 +101,11 @@
                 src="Media_Ressources/arrowDown.svg"
               />
             </div>
-            <div>
-              <ul id="uniUstensiles" class="ustentilsList"></ul>
-            </div>
+
+            <ul id="uniUstensiles" class="ustentilsList"></ul>
           </div>
-        </div>
-      </div>
+        </article>
+      </section>
       <ul id="recipeList"></ul>
     </main>
   </body>
