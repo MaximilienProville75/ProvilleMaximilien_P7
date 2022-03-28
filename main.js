@@ -44,31 +44,41 @@ searchBar.addEventListener("keyup", (e) => {
       recipe.description.toLowerCase().includes(searchString)
     );
   });
+
+  console.log(filteredRecipes);
   tagFilteringRecipe(tagActive, filteredRecipes);
   displayRecipes(filteredRecipes);
 });
+
 //! SearchBars Algorithm For Loop V.2
-searchBar.addEventListener("keyup", (e) => {
-  const searchString = e.target.value.toLowerCase();
-
-  //Realise the same logic using a for loop Loop rather than a filer / map method
-  const filteredRecipes = recipes.filter((recipe) => {
-    const arrayIngredient = recipe.ingredients.map((ingredient) => {
-      return ingredient.ingredient.toLowerCase();
-    });
-    const arrayUstentils = recipe.ustensils.map((us) => {
-      return us.toLowerCase();
-    });
-
-    return (
-      recipe.name.toLowerCase().includes(searchString) ||
-      arrayIngredient.includes(searchString) ||
-      recipe.description.toLowerCase().includes(searchString)
-    );
+const searchAlgo2 = () => {
+  searchBar.addEventListener("keyup", (e) => {
+    const searchString = e.target.value.toLowerCase();
+    //Realise the same logic using a for loop Loop rather than a filer / map method
+    let filteredRecipes = [];
+    for (let recipe of recipes) {
+      let arrayIng = [];
+      let arrayUst = [];
+      for (let recipeIngredient of recipe.ingredients) {
+        arrayIng.push(recipeIngredient.ingredient.toLowerCase());
+      }
+      for (let recipeUstensils of recipe.ustensils) {
+        arrayUst.push(recipeUstensils.toLowerCase());
+      }
+      console.log(arrayIng);
+      console.log(arrayUst);
+      if (
+        recipe.name.toLowerCase().includes(searchString) ||
+        arrayIng.includes(searchString) ||
+        recipe.description.toLowerCase().includes(searchString)
+      ) {
+        filteredRecipes.push(recipe);
+      }
+    }
+    tagFilteringRecipe(tagActive, filteredRecipes);
+    displayRecipes(filteredRecipes);
   });
-  tagFilteringRecipe(tagActive, filteredRecipes);
-  displayRecipes(filteredRecipes);
-});
+};
 
 //! Ingredient SearchBar
 ingredientFilter.addEventListener("keyup", (e) => {
@@ -235,7 +245,7 @@ const displayRecipes = (recipes) => {
 const displayIngredient = (ingredients) => {
   const htmlString = ingredients
     .map((ingredient) => {
-      return `<li data-name="${ingredient}">${ingredient}</div>`;
+      return `<li data-name="${ingredient}" class="search__filter__list__item ingredients">${ingredient}</div>`;
     })
     .join("");
   ingredientUl.innerHTML = htmlString;
@@ -480,7 +490,10 @@ const dropDownBtn2 = document.getElementById("arrowDropDown2");
 const dropDownBtn3 = document.getElementById("arrowDropDown3");
 
 dropDownBtn1.onclick = function () {
+  document.getElementById("filterFormImgIng").classList.toggle("open");
+  document.getElementById("ingredientFilter").classList.toggle("larger");
   document.getElementById("uniIngredient").classList.toggle("show");
+
   dropDownBtn1.classList.toggle("rotate");
 };
 dropDownBtn2.onclick = function () {
