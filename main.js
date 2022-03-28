@@ -98,6 +98,13 @@ ingredientFilter.addEventListener("keyup", (e) => {
   });
   document.getElementById("uniIngredient").classList.add("show");
   dropDownBtn1.classList.add("rotate");
+
+  const div1 = document.getElementById("uniIngredient");
+  if (div1.classList.contains("show")) {
+    document.getElementById("filterFormImgIng").classList.add("open");
+    document.getElementById("ingredientFilter").classList.add("larger");
+    document.getElementById("uniIngredient").classList.add("show");
+  }
 });
 
 //! Appareil SearchBar
@@ -123,7 +130,7 @@ appareilFilter.addEventListener("keyup", (e) => {
 //! Ustentils SearchBar
 ustensilesFilter.addEventListener("keyup", (e) => {
   const searchString = e.target.value.toLowerCase();
-
+  document.getElementById("filterFormImgIng").classList.toggle("open");
   const filteredUstentiles = singleUstensils.filter((ustentils) => {
     return ustentils.toLowerCase().includes(searchString);
   });
@@ -254,7 +261,7 @@ const displayIngredient = (ingredients) => {
 const displayAppareil = (appareil) => {
   const htmlString = appareil
     .map((appa) => {
-      return `<li data-name="${appa}">${appa}</li>`;
+      return `<li data-name="${appa}" class="search__filter__list__item appareils">${appa}</li>`;
     })
     .join("");
   appareilUl.innerHTML = htmlString;
@@ -262,7 +269,7 @@ const displayAppareil = (appareil) => {
 
 const displayUstensiles = (Ustensiles) => {
   const htmlString = Ustensiles.map((ust) => {
-    return `<li data-name="${ust}">${ust}</li>`;
+    return `<li data-name="${ust}" class="search__filter__list__item ustensile">${ust}</li>`;
   }).join("");
   ustensilesUl.innerHTML = htmlString;
 };
@@ -485,6 +492,8 @@ const tagFilteringRecipe = (tag, recipes) => {
 
 //*DropDown Functions
 
+//*DropDown Functions
+
 const dropDownBtn1 = document.getElementById("arrowDropDown1");
 const dropDownBtn2 = document.getElementById("arrowDropDown2");
 const dropDownBtn3 = document.getElementById("arrowDropDown3");
@@ -496,12 +505,20 @@ dropDownBtn1.onclick = function () {
 
   dropDownBtn1.classList.toggle("rotate");
 };
+
 dropDownBtn2.onclick = function () {
+  document.getElementById("filterFormImgApp").classList.toggle("open");
+  // document.getElementById("appareilFilter").classList.toggle("larger");
   document.getElementById("uniAppareil").classList.toggle("show");
+
   dropDownBtn2.classList.toggle("rotate");
 };
+
 dropDownBtn3.onclick = function () {
+  document.getElementById("filterFormImgUst").classList.toggle("open");
+  document.getElementById("ustensilesFilter").classList.toggle("larger");
   document.getElementById("uniUstensiles").classList.toggle("show");
+
   dropDownBtn3.classList.toggle("rotate");
 };
 

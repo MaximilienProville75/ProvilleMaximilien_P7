@@ -5,7 +5,7 @@
 }
 
 body{
-  max-width: 1200px;
+  max-width: 1400px;
   margin: auto;
 }
 
@@ -23,7 +23,7 @@ header{
 }
 
 .searchWrapper{
-    max-width: 1200px;
+    max-width: 1400px;
     margin: auto;
     margin-top: 20px;
     display: flex;
@@ -159,40 +159,15 @@ justify-content: space-between;
 .arrowDropDown1 img{
   color: blue;
 }
-/* .arrowDropDown1:hover {
-  rotate: 180deg;
-} */
 
 .rotate {rotate: 180deg;}
-
-
-
-
-/* .show {visibility: visible;} */
-
-/* Ingredients */
-/* .ingredientFilter{
-  background-color: #3282F7;
-  color: white;
-  min-width: 100px;
-  max-width: 650px;
-  max-height: 400px;
-  min-height: 50px;
-  margin-right: 15px;
-  border-radius: 5px;
-  display: inline-block;
-} */
 
 #searchIngredient{
   background-color: #3282F7;
   color: white;
-  padding: 10px;
   border-radius: 5px;
-  padding-right: 35px;
+  width: 100%;
 }
-
-
-
 
 /*   */
 /*   */
@@ -200,31 +175,26 @@ justify-content: space-between;
 /* Ingredient */
 .article-ingredients{
   width: auto;
-}
-
-.dropdownIngredient{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: #3282F7;
+  transition: width 0.1s ease;
 }
 
 .filterFormImgIng{
   cursor: pointer;
-  width: 12rem;
+  width: 14rem;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 0 5px;
   color: white;
   height: 5rem;
   border-radius: 3px;
   transition: width 0.1s ease;
+  margin-right: 5px;
 }
 
 .ingreidientsList{
-  width: 12rem;
+  max-width: 450px;
   position: absolute;
   display: flex;
   justify-content: space-between;
@@ -236,12 +206,17 @@ justify-content: space-between;
   opacity: 0;
   visibility: hidden;
   z-index: 2;
+  margin-top: 0px;
+  padding: 5px;
+  max-height: 450px;
+  overflow: -moz-hidden-unscrollable;
+  width: 100%;
 }
 
-.show {
-  opacity: 1;
-  visibility: visible;
-  width: 40%;
+.show  {
+  opacity: 1 !important;
+  visibility: visible !important;
+  /* width: 38.1%; */
 }
 
 .ingredients {
@@ -249,8 +224,9 @@ justify-content: space-between;
 }
 
 .larger{
-  width: 40%;
+  max-width: 450px;
   margin-right: 1rem;
+  width: 100%;
 }
 
 .open {
@@ -269,79 +245,164 @@ justify-content: space-between;
   transition: all 0.1s;
 }
 
+/* 
+/
+/
+*/
+/* Appareil Filter */
+/* 
+/
+/
+*/
 
+.appareils{
+  background-color: #68d9a4;
+}
+.article-appareils{
+  width: auto;    
+  transition: width 0.1s ease;
+}
 
-
-
-
+.filterFormImgApp{
+  width: 212px;
+  cursor: pointer;
+  width: 13rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  color: white;
+  height: 5rem;
+  border-radius: 3px;
+  transition: width 0.1s ease;
+  margin-right: 5px;
+}
 
 
 .AppareilList{
+  width: 195px;
   position: absolute;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  margin-top: -1px;
-  background-color: #68D9A4;
-  width: 230px;
-  max-height: 320px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   flex-wrap: wrap;
-  display: none;
-  list-style: none;
-  padding: 10px;
+  border-radius: 0 0 3px 3px;
+  padding: 1rem 1rem;
+  top: 100%;
+  transition: all 0.1s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 2;
+  margin-top: 0;
 }
 
-.ustentilsList{
-  position: absolute;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  margin-top: 0px;
-  background-color: #ED6454;
-  max-width: 652px;
-  max-height: 320px;
-  display: -webkit-box;
-  -webkit-line-clamp: 160;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  display: none;
-  list-style: none;
-padding: 10px;
-min-width: 310px;
-}
-/* Appareil */
-#appareilFilter{
-  /* background-color: #68D9A4; */
+.search__filter__list__item2{
+  flex-basis: 33%;
+  position: relative;
+  margin-bottom: 0.2rem;
+  display: block;
   color: white;
-  max-height: 400px;
-  min-height: 50px;
-  margin-right: 15px;
-  border-radius: 5px;
+  text-align: left;
+  transition: all 0.1s;
 }
 
 
+/* 
+/
+/
+/
+/
+/
+//
+/
+*/
 
-/* .show {visibility:visible;} */
 
 #searchAppreil{
   background-color: #68D9A4;
   color: white;
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 5px;
 }
 
-
+/* 
+/
+/
+/
+/
+//
+ */
 /* Ustentiles */
-#ustensilesFilter{
-  /* background-color: #ED6454; */
-  color: white;
-  max-width: 650px;
-  max-height: 400px;
-  border-radius: 5px;
+/* 
+/
+/
+/
+/
+//
+ */
+.article-ust {
+  width: auto;
+  transition: width 0.1s ease;
 }
+
+article {
+  display: block;
+}
+
+.filterFormImgUst{
+  cursor: pointer;
+    width: 12rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    color: white;
+    height: 5rem;
+    border-radius: 3px;
+    transition: width 0.1s ease;
+    width: 14rem;
+}
+
+.ustensile {
+  background-color: #ed6454;
+}
+
+.ustentilsList{
+  width: 212px;
+  padding: 3px;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-radius: 0 0 3px 3px;
+  padding: 1rem 1rem;
+  top: 100%;
+  transition: all 0.1s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 2;
+  margin-top: 0;
+  max-height: 450px;
+  overflow: hidden;
+}
+
+.search__filter__list__item3{
+  flex-basis: 33%;
+  position: relative;
+  margin-bottom: 0.2rem;
+  display: block;
+  color: white;
+  text-align: left;
+  transition: all 0.1s;
+}
+
+
+/* #ustensilesFilter{
+  background-color: #ED6454;
+  color: white;
+  border-radius: 5px;
+} */
 #searchUstensiles{
   background-color: #ED6454;
   color: white;
