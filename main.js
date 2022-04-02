@@ -50,36 +50,6 @@ searchBar.addEventListener("keyup", (e) => {
   displayRecipes(filteredRecipes);
 });
 
-//! SearchBars Algorithm For Loop V.2
-const searchAlgo2 = () => {
-  searchBar.addEventListener("keyup", (e) => {
-    const searchString = e.target.value.toLowerCase();
-    //Realise the same logic using a for loop Loop rather than a filer / map method
-    let filteredRecipes = [];
-    for (let recipe of recipes) {
-      let arrayIng = [];
-      let arrayUst = [];
-      for (let recipeIngredient of recipe.ingredients) {
-        arrayIng.push(recipeIngredient.ingredient.toLowerCase());
-      }
-      for (let recipeUstensils of recipe.ustensils) {
-        arrayUst.push(recipeUstensils.toLowerCase());
-      }
-      console.log(arrayIng);
-      console.log(arrayUst);
-      if (
-        recipe.name.toLowerCase().includes(searchString) ||
-        arrayIng.includes(searchString) ||
-        recipe.description.toLowerCase().includes(searchString)
-      ) {
-        filteredRecipes.push(recipe);
-      }
-    }
-    tagFilteringRecipe(tagActive, filteredRecipes);
-    displayRecipes(filteredRecipes);
-  });
-};
-
 //! Ingredient SearchBar
 ingredientFilter.addEventListener("keyup", (e) => {
   const searchString = e.target.value.toLowerCase();
