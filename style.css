@@ -236,6 +236,7 @@ justify-content: space-between;
 }
 
 .search__filter__list__item{
+  font-size: 14px;
   flex-basis: 33%;
   position: relative;
   margin-bottom: 0.2rem;

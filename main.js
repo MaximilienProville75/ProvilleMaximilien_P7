@@ -25,74 +25,50 @@ const ustensilesUl = document.getElementById("uniUstensiles");
 let tagList = document.getElementById("tagList");
 let tagActive = [];
 
-//! SearchBars Algorithm Filter V.1
+//! SearchBars Algorithm For Loop V.2open .
 searchBar.addEventListener("keyup", (e) => {
   const searchString = e.target.value.toLowerCase();
-
-  // Utiliser sous forme de fonction
-  const filteredRecipes = recipes.filter((recipe) => {
-    const arrayIngredient = recipe.ingredients.map((ingredient) => {
-      return ingredient.ingredient.toLowerCase();
-    });
-    const arrayUstentils = recipe.ustensils.map((us) => {
-      return us.toLowerCase();
-    });
-
-    return (
-      recipe.name.toLowerCase().includes(searchString) ||
-      arrayIngredient.includes(searchString) ||
-      recipe.description.toLowerCase().includes(searchString)
-    );
-  });
-
-  console.log(filteredRecipes);
+  let filteredRecipes = [];
+  for (let i = 0; i < recipes.length; i += 1) {
+    let arrayIng = [];
+    let arrayUst = [];
+    for (let recipeIngredient of recipes[i].ingredients) {
+      arrayIng.push(recipeIngredient.ingredient.toLowerCase());
+    }
+    for (let recipeUstensils of recipes[i].ustensils) {
+      arrayUst.push(recipeUstensils.toLowerCase());
+    }
+    console.log(arrayIng);
+    console.log(arrayUst);
+    if (
+      recipes[i].name.toLowerCase().includes(searchString) ||
+      arrayIng.includes(searchString) ||
+      recipes[i].description.toLowerCase().includes(searchString)
+    ) {
+      filteredRecipes.push(recipes[i]);
+    }
+  }
   tagFilteringRecipe(tagActive, filteredRecipes);
   displayRecipes(filteredRecipes);
 });
 
-//! SearchBars Algorithm For Loop V.2
-const searchAlgo2 = () => {
-  searchBar.addEventListener("keyup", (e) => {
-    const searchString = e.target.value.toLowerCase();
-    //Realise the same logic using a for loop Loop rather than a filer / map method
-    let filteredRecipes = [];
-    for (let recipe of recipes) {
-      let arrayIng = [];
-      let arrayUst = [];
-      for (let recipeIngredient of recipe.ingredients) {
-        arrayIng.push(recipeIngredient.ingredient.toLowerCase());
-      }
-      for (let recipeUstensils of recipe.ustensils) {
-        arrayUst.push(recipeUstensils.toLowerCase());
-      }
-      console.log(arrayIng);
-      console.log(arrayUst);
-      if (
-        recipe.name.toLowerCase().includes(searchString) ||
-        arrayIng.includes(searchString) ||
-        recipe.description.toLowerCase().includes(searchString)
-      ) {
-        filteredRecipes.push(recipe);
-      }
-    }
-    tagFilteringRecipe(tagActive, filteredRecipes);
-    displayRecipes(filteredRecipes);
-  });
-};
-
-//! Ingredient SearchBar
+//! Ingredient SearchBar :
+let ingUlChild = [];
 ingredientFilter.addEventListener("keyup", (e) => {
   const searchString = e.target.value.toLowerCase();
 
+  console.log("before", singleIngredients);
   const filteredIngredient = singleIngredients.filter((ingredient) => {
     return ingredient.toLowerCase().includes(searchString);
   });
+  console.log("after", filteredIngredient);
   displayIngredient(filteredIngredient);
 
-  let ingUlChild = [...new Set(ingredientUl.children)];
+  ingUlChild = [...new Set(ingredientUl.children)];
   ingUlChild.forEach((ing) => {
     ing.addEventListener("click", () => {
       renderIngredientTag(ing.innerHTML);
+      //! Filter New TagList need updated version of filteredRecipes.
       filterNewTagList(ing.innerHTML);
     });
   });
@@ -107,7 +83,7 @@ ingredientFilter.addEventListener("keyup", (e) => {
   }
 });
 
-//! Appareil SearchBar
+//! Appareil SearchBar :
 appareilFilter.addEventListener("keyup", (e) => {
   const searchString = e.target.value.toLowerCase();
 
@@ -127,7 +103,7 @@ appareilFilter.addEventListener("keyup", (e) => {
   dropDownBtn2.classList.add("rotate");
 });
 
-//! Ustentils SearchBar
+//! Ustentils SearchBar :
 ustensilesFilter.addEventListener("keyup", (e) => {
   const searchString = e.target.value.toLowerCase();
   document.getElementById("filterFormImgIng").classList.toggle("open");
@@ -147,8 +123,7 @@ ustensilesFilter.addEventListener("keyup", (e) => {
   dropDownBtn3.classList.add("rotate");
 });
 
-//! Fetch Function
-
+//! Fetch Function :
 const loadRecipes = async () => {
   try {
     const res = await fetch("./recipes.json");
@@ -231,12 +206,15 @@ const displayRecipes = (recipes) => {
           <div class="IngredientSteps">
             <div class="Ingredients">
               <ul class="IngredientUl">
-                ${recipeIngredient.map(
-                  (recipe) =>
-                    `<li>${recipe.ingredient} ${recipe.quantity} ${
-                      recipe.unit === undefined ? "" : recipe.unit
+                ${recipeIngredient.reduce((acc, val) => {
+                  console.log(acc);
+                  return (
+                    acc +
+                    `<li>${val.ingredient} ${val.quantity} ${
+                      val.unit === undefined ? "" : val.unit
                     }</li>`
-                )}
+                  );
+                }, "")}
               </ul>
             </div>
             <p class="recipeDescription ">${recipe.description}</p>
@@ -452,12 +430,13 @@ const tagFilteringRecipe = (tag, recipes) => {
     appArr.push(recipeApp);
   });
 
-  let soloIng = [...new Set(ingArr)].sort();
+  //! Mis a Jour les tableau de tag
+  singleIngredients = [...new Set(ingArr)].sort();
   let singleUst = [...new Set(ustArr)].sort();
   let singleApp = [...new Set(appArr)].sort();
 
   displayAppareil(singleApp);
-  displayIngredient(soloIng);
+  displayIngredient(singleIngredients);
   displayUstensiles(singleUst);
 
   let ingUlChild = [...new Set(ingredientUl.children)];
